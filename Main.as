@@ -30,6 +30,8 @@ void Update(float dt) {
     getCarStates(script, vis.AsyncState);
     getGameStates(script);
 
+    
+
     // Reactor Calculations
     // reactorBlockHitboxCalculationsBlock();
     // reactorBlockHitboxCalculationsFreeBlock();
@@ -37,6 +39,7 @@ void Update(float dt) {
     legacyReactorCalculations(vis.AsyncState);
 
     // Visuals
+    Draw();
     drawVisualReactorCountdown();
-    drawVignetteReactorCountdown(dt);   
+    drawVignetteReactorCountdown(dt);
 }
