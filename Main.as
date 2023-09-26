@@ -12,6 +12,9 @@ void Update(float dt) {
     auto scene = cast<ISceneVis@>(app.GameScene);
     if (scene is null) return;
 
+    auto port = cast<CInputPort@>(app.InputPort);
+    if (port is null) return;
+
     CSceneVehicleVis@ vis;
     auto player = cast<CSmPlayer@>(playground.GameTerminals[0].GUIPlayer);
     if (player !is null) {
@@ -21,7 +24,7 @@ void Update(float dt) {
     }
     if (vis is null) return;
 
-    time();
+    time(port);
 
     // Game states
     getCarStates(script, vis.AsyncState);

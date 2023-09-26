@@ -41,15 +41,13 @@ void drawVignetteReactorCountdown(float dt)
             (Enable_Final_Pulse__Vignette && CountdownTime >= 1 && CountdownTime <= 100))
         {
         Vignette_Opacity -= fadeRate * dt;
-        if (Vignette_Opacity < 0.0) {
-            Vignette_Opacity = 0.0;
+            if (Vignette_Opacity < 0.0) {
+                Vignette_Opacity = 0.0;
+            }
+        } else {
+            Vignette_Opacity = User_Vignette_Opacity;
         }
-    } else {
-        Vignette_Opacity = User_Vignette_Opacity;
     }
-}
-
-
 }
 
 void Draw() 

@@ -1,6 +1,12 @@
-void time() {
+void time(CInputPort@ port) {
     checkReactorDrop();
+
     uint CurrentTime = Time::get_Now();
+
+    if (port.CurrentActionMap == "MenuInputsMap") {
+        PreviousTime = CurrentTime;
+        return;
+    }
 
     if (CountdownTime > 0) {
         CountdownTime -= CurrentTime - PreviousTime;
@@ -8,8 +14,8 @@ void time() {
     }
 
     PreviousTime = CurrentTime;
-
 }
+
 
 float previousReactorFinalCountdown = ReactorFinalCountdown;
 
