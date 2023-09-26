@@ -30,8 +30,6 @@ void Update(float dt) {
     getCarStates(script, vis.AsyncState);
     getGameStates(script);
 
-    
-
     // Reactor Calculations
     // reactorBlockHitboxCalculationsBlock();
     // reactorBlockHitboxCalculationsFreeBlock();
