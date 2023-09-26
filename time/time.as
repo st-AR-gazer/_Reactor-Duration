@@ -29,7 +29,7 @@ void checkReactorDrop() {
             drop = 0;
         }
     }
-    print(CountdownTime);
+
     if (drop > 0.08) {
         CountdownTime = 6000;
     }
