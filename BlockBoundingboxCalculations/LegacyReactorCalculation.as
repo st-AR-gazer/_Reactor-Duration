@@ -17,6 +17,7 @@ float RLDamperLen;
 void legacyReactorCalculations(CSceneVehicleVisState@ state) {
     try {
         ReactorFinalCountdown = Dev::GetOffsetFloat(state, 380);
+        print(ReactorFinalCountdown);
 
         uint newReactorLevel = uint(state.ReactorBoostLvl);
         uint newReactorType  = uint(state.ReactorBoostType);        
@@ -46,7 +47,6 @@ void legacyReactorCalculations(CSceneVehicleVisState@ state) {
             {
             if (newReactorLevel != 0) {
                 if (ReactorFinalCountdown == 0.01 or ReactorFinalCountdown == 0.05) {
-                    print(newReactorLevel + " " + ReactorFinalCountdown);
                     CountdownTime = 950;
                 } else {
                     CountdownTime = 6000;
@@ -81,5 +81,8 @@ void legacyReactorCalculations(CSceneVehicleVisState@ state) {
         ReactorType  = newReactorType;
         PreviousReactorLevel = newReactorLevel;
         PreviousReactorType  = newReactorType;
+
+        
+
     } catch { }
 }

@@ -1,24 +1,28 @@
-int absoluteStartTime = -1;
+void time() {
+    checkReactorDrop();
+    uint CurrentTime = Time::get_Now();
 
-int absolute(int value) {
-    return value < 0 ? -value : value;
+    if (CountdownTime > 0) {
+        CountdownTime -= CurrentTime - PreviousTime;
+        if (CountdownTime < 0) CountdownTime = 0;
+    }
+
+    PreviousTime = CurrentTime;
+
 }
 
-void time(float dt) {
-    if (CountdownTime == 6000 && absoluteStartTime == -1) {
-        absoluteStartTime = Time::get_Now();
+float previousReactorFinalCountdown = ReactorFinalCountdown;
+
+void checkReactorDrop() {
+    float drop = previousReactorFinalCountdown - ReactorFinalCountdown;
+
+    if (ReactorFinalCountdown == 0 && previousReactorFinalCountdown > 0.91) {
+        drop = previousReactorFinalCountdown;
     }
 
-    CountdownTime -= int(dt);
-
-    if (CountdownTime <= 0) {
-        absoluteStartTime = -1;
-    } else {
-        int elapsedTime = Time::get_Now() - absoluteStartTime;
-        int expectedCountdown = 6000 - elapsedTime;
-
-        if (absolute(CountdownTime - expectedCountdown) > 10) {
-            CountdownTime = expectedCountdown;
-        }
+    if (drop > 0.08) {
+        CountdownTime = 6000;
     }
+
+    previousReactorFinalCountdown = ReactorFinalCountdown;
 }

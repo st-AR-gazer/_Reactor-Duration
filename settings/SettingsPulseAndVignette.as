@@ -1,5 +1,5 @@
 [Setting category="Pulse / Vignette" name="Use Pulse/Vignette"]
-bool Use_Pule_Vignette = false;
+bool Use_Pule_Vignette = true;
 
 [Setting category="Pulse / Vignette" name="Use default reactor colours for pulse/vignette" description="Currently overrides 'last pulse white', and I cannot be bothered to fix it right now..."]
 bool use_Default_Cooldown_Colors;

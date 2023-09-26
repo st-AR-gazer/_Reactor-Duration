@@ -71,6 +71,7 @@ void getCarStates(CSmScriptPlayer@ script, CSceneVehicleVisState@ state) {
 
 }
 
+
 // Game states
 int CountdownTime = 0;
 uint PreviousTime = Time::get_Now();
@@ -83,4 +84,3 @@ void getGameStates(CSmScriptPlayer@ script) {
     previousRaceTime = currentRaceTime;
     currentRaceTime = script.CurrentRaceTime;
 }
-

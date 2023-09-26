@@ -21,7 +21,7 @@ void Update(float dt) {
     }
     if (vis is null) return;
 
-    time(dt);
+    time();
 
     // Game states
     getCarStates(script, vis.AsyncState);
