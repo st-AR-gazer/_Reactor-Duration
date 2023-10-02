@@ -30,7 +30,7 @@ void checkReactorDrop() {
         }
     }
 
-    if (drop > 0.08) {
+    if (drop > 0.08 && ReactorLevel) {
         CountdownTime = 6000;
     }
 
