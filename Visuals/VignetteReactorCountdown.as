@@ -7,9 +7,7 @@ const float fadeRate = 100.0 / fadeDuration;
 
 void drawVignetteReactorCountdown(float dt)
 {
-    if (Vignette_Opacity > 100.0) {
-        Vignette_Opacity = 100.0;
-    }
+    if (Vignette_Opacity > 100.0) Vignette_Opacity = 100.0;
 
     if (Vignette_Color.x > 255.0) Vignette_Color.x = 255.0;
     if (Vignette_Color.y > 255.0) Vignette_Color.y = 255.0;
