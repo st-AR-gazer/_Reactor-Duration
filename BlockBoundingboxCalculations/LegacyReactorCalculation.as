@@ -30,19 +30,27 @@ void legacyReactorCalculations(CSceneVehicleVisState@ state) {
 // 
         if (((newReactorLevel != 0 or newReactorType != 0) and (ReactorLevel == 0 and ReactorType == 0)) 
             or 
-                (((FRMaterial == 4 or FLMaterial == 4 or RRMaterial == 4 or RLMaterial == 4 or FRMaterial == 9 or FLMaterial == 9 or RRMaterial == 9 or RLMaterial == 9) 
-                and 
-                (FRMaterial == PreviousFRMaterial or FLMaterial == PreviousFLMaterial or RRMaterial == PreviousRRMaterial or RLMaterial == PreviousRLMaterial))
-                and 
-                (worldPossX < (oldWorldPossX + 32) && worldPossX > (oldWorldPossX - 32) &&
-                 worldPossY < (oldWorldPossY + 32) && worldPossY > (oldWorldPossY - 32) &&
-                 worldPossZ < (oldWorldPossZ + 32) && worldPossZ > (oldWorldPossZ - 32))   
-            or 
-            (((FRMaterial == 0) or (FLMaterial == 0) or (RRMaterial == 0) or (RLMaterial == 0)))) 
+                // (
+                //     ((FRMaterial == 4 or FLMaterial == 4 or RRMaterial == 4 or RLMaterial == 4 or FRMaterial == 9 or FLMaterial == 9 or RRMaterial == 9 or RLMaterial == 9) 
+                //         and 
+                //         (FRMaterial == PreviousFRMaterial or FLMaterial == PreviousFLMaterial or RRMaterial == PreviousRRMaterial or RLMaterial == PreviousRLMaterial))
+                //         and 
+                //         (worldPossX < (oldWorldPossX + 32) && worldPossX > (oldWorldPossX - 32) &&
+                //         worldPossY < (oldWorldPossY + 32) && worldPossY > (oldWorldPossY - 32) &&
+                //         worldPossZ < (oldWorldPossZ + 32) && worldPossZ > (oldWorldPossZ - 32))   
+                //     or 
+                //     (
+                //         ((FRMaterial == 0) or (FLMaterial == 0) or (RRMaterial == 0) or (RLMaterial == 0))
+                //     )
+                // )
+            // or
+            (currentRaceTime < 0 and ReactorLevel < 0)
             or 
             (newReactorType != PreviousReactorType) 
             or 
-            (newReactorLevel != PreviousReactorLevel)) 
+            (newReactorLevel != PreviousReactorLevel)
+            
+            ) 
 // 
             {
             if (newReactorLevel != 0) {
