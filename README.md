@@ -13,7 +13,7 @@ This plugin is designed to improve the player's experience by visually represent
 
 ## ⚠️ Important Notes
 
-1. **Accuracy Limitations:** The plugin's current version may not always provide 100% accurate time estimates.
+1. **Accuracy Limitations:** The plugin's current version may not always provide 100% accurate time estimates, during the first 5 seconds (the last second is always accurate).
 2. **Reactor Retriggering:** Inaccuracies occur during sustained contact with the reactor block (more than 1 frame on surfaces that are not road or platform).
 3. **Reactor Nuance:** The initial five-second duration cannot be affected by certain gameplay elements, leading to it being inacurate.
 
