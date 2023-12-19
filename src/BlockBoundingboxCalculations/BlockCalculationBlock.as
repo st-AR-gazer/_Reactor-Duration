@@ -1,3 +1,4 @@
+/*
 bool hasCalculatedReactorBlocks = false;
 
 class BlockInfo {
@@ -272,7 +273,7 @@ bool isReactorBlock(const string &in blockName, int index, const vec3 &in blockP
 shared vec3 CoordToPos(nat3 coord) {
     return vec3(coord.x * 32, (int(coord.y) - 8) * 8, coord.z * 32);
 }
-
+*/
 /* Old code = bad
     bool isReactorBlock(const string &in blockName, int index, const vec3 &in blockPosition) {
     if (roadFlat.Find(blockName) >= 0) {
@@ -327,7 +328,7 @@ shared vec3 CoordToPos(nat3 coord) {
     } 
     }
 */
-
+/*
 void cacheReactorBlocks() {
     //some cacheing stuff goes here if I bother implementing it
 }
@@ -347,3 +348,4 @@ bool isNear(const vec3 &in pos1, const vec3 &in pos2) {
     float threshold = 0;
     return (pos1 - pos2).Length() <= threshold;
 }
+*/
