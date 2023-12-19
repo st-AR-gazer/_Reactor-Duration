@@ -18,7 +18,7 @@ class ReactorBlockInfo {
 array<BlockInfo> reactorBlocks;
 array<ReactorBlockInfo> blocks;
 
-// #region All reactor granting BLOCKS, (Items (gates) are not included)
+// #region All reactor granting BLOCKS (wood is not implemented yet xdd), (Items (gates) are not included)
 
     // Road (-bad)
     array<string> roadFlat = {
