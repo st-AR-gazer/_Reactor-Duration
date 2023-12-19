@@ -32,8 +32,8 @@ void Update(float dt) {
     getGameStates(script);
 
     // Reactor Calculations
-    // reactorBlockHitboxCalculationsBlock();
-    // reactorBlockHitboxCalculationsFreeBlock();
+    reactorBlockHitboxCalculationsBlock();
+    reactorBlockHitboxCalculationsFreeBlock();
 
     legacyReactorCalculations(vis.AsyncState);
 
