@@ -206,7 +206,6 @@ array<int> reactorBlockIndices;
 // #endregion
 
 void reactorBlockHitboxCalculationsBlock() {
-    log("reactorBlockHitboxCalculationsBlock: Start", LogLevel::Info, 209);
     CTrackMania@ app = cast<CTrackMania>(GetApp());
     if (app is null) {
         return;
