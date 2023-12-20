@@ -23,13 +23,8 @@ void legacyReactorCalculations(CSceneVehicleVisState@ state) {
         ReactorFinalCountdown = Dev::GetOffsetFloat(state, 380);
         // print(ReactorFinalCountdown);
 
-//        if (isReactorActive(state)) { print("Reactor is active"); } else { print("Reactor is not active"); };
-//        if (isGroundContectMaterialConditionMet(state)) { print("Ground contact material condition is met"); } else { print("Ground contact material condition is not met"); };
-//        if (reactorIsNotOldReactor()) { print("reactor is not old reactor"); } else { print("reactor is old reactor"); };
-
         if ((isReactorActive(state)) or (isGroundContectMaterialConditionMet(state))/* or (reactorIsNotOldReactor())*/) {
                 resetReactorCountdown();
-                print("happens");
         } else {
             CountdownTime -= 1;
         }
@@ -69,12 +64,20 @@ bool isGroundContectMaterialConditionMet(CSceneVehicleVisState@ state) {
 void resetReactorCountdown() {
     print("reset happens");
     if (newReactorLevel != 0) {
+    print("first hurdle");
+
         if (ReactorFinalCountdown == 0.01 or ReactorFinalCountdown == 0.05) {
+    print("second hurdle");
+
             CountdownTime = 950;
         } else {
+    print("third hurdle");
+
             CountdownTime = 6000;
         }
     } else {
+    print("forth hurdle");
+
         CountdownTime = 0;
     }
 }
