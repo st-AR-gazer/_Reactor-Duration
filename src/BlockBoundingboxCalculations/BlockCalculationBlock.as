@@ -206,8 +206,11 @@ array<int> reactorBlockIndices;
 // #endregion
 
 void reactorBlockHitboxCalculationsBlock() {
+    log("reactorBlockHitboxCalculationsBlock: Start", LogLevel::Info, 209);
     CTrackMania@ app = cast<CTrackMania>(GetApp());
-    if (app is null) return;
+    if (app is null) {
+        return;
+    }
 
     auto map = cast<CGameCtnChallenge@>(app.RootMap);
     if (app.RootMap is null) {
@@ -220,13 +223,11 @@ void reactorBlockHitboxCalculationsBlock() {
     }
 
     auto blocksArray = map.Blocks;
+    log("reactorBlockHitboxCalculationsBlock: Processing " + blocksArray.Length + " blocks", LogLevel::Info, 226);
 
     for (uint i = 0; i < blocksArray.Length; i++) {
         string blockName = blocksArray[i].BlockInfo.Name;
-        uint x = blocksArray[i].CoordX;
-        uint y = blocksArray[i].CoordY;
-        uint z = blocksArray[i].CoordZ;
-        vec3 blockCoord = vec3(x, y, z);
+        vec3 blockCoord = vec3(blocksArray[i].CoordX, blocksArray[i].CoordY, blocksArray[i].CoordZ);
 
         if (isReactorBlock(blockName)) {
             vec3 blockPos = CoordToPos(blockCoord);
@@ -234,10 +235,13 @@ void reactorBlockHitboxCalculationsBlock() {
             reactorBlockGridPositions.InsertLast(blockCoord);
             reactorBlockWorldPositions.InsertLast(blockPos);
             reactorBlockIndices.InsertLast(i);
+
+            log("Added reactor block: " + blockName + " at position: " + blockPos.ToString(), LogLevel::InfoG, 239);
         }
     }
 
     hasCalculatedReactorBlocks = true;
+    log("reactorBlockHitboxCalculationsBlock: Completed", LogLevel::Info, 244);
 }
 
 bool isReactorBlock(const string &in blockName) {
@@ -259,32 +263,34 @@ bool isReactorBlock(const string &in blockName) {
 }
 
 shared vec3 CoordToPos(vec3 coord) {
-    return vec3(coord.x * 32, (int(coord.y) - 8) * 8, coord.z * 32);
+    vec3 pos = vec3(coord.x * 32, (int(coord.y) - 8) * 8, coord.z * 32);
+    log("CoordToPos: Converted " + coord.ToString() + " to " + pos.ToString(), LogLevel::Info, 267);
+    return pos;
 }
 
 void cacheReactorBlocks() {
-    //some cacheing stuff goes here if I bother implementing it
+    // Implement caching logic if required
+    log("cacheReactorBlocks: Called", LogLevel::Info, 273);
+    // ...
 }
 
 void checkCarPosition() {
+    log("checkCarPosition: Start", LogLevel::Info, 278);
     vec3 carPosition = vec3(carPositionX, carPositionY, carPositionZ);
 
     for (uint i = 0; i < reactorBlockWorldPositions.Length; i++) {
         if (isNear(carPosition, reactorBlockWorldPositions[i])) {
-            print(32);
-            print(vec3(carPosition - reactorBlockWorldPositions[i].Length()));
-            print(carPosition);
-            print(reactorBlockWorldPositions[i]);
-            print(carPositionX + " " + carPositionY + " " + carPositionZ);
-
+            log("checkCarPosition: Car is near reactor block at position: " + reactorBlockWorldPositions[i].ToString(), LogLevel::Warn, 283);
             resetReactorCountdown();
             break;
         }
     }
+    log("checkCarPosition: End", LogLevel::Info, 288);
 }
 
 bool isNear(const vec3 &in pos1, const vec3 &in pos2) {
     float threshold = 32;
-    return (pos1 - pos2).Length() <= threshold;
-
+    bool near = (pos1 - pos2).Length() <= threshold;
+    log("isNear: Positions " + pos1.ToString() + " and " + pos2.ToString() + " are " + (near ? "near" : "not near"), LogLevel::Info, 294);
+    return near;
 }
