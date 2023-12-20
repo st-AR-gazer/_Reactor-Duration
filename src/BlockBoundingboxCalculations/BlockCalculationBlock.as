@@ -16,7 +16,7 @@ class ReactorBlockInfo {
 }
 
 array<BlockInfo> reactorBlocks;
-//array<AllCurrentReactorBlocks> blocks;
+array<AllCurrentReactorBlocks> blocks;
 
 // #region All reactor granting BLOCKS (wood is not implemented yet xdd), (Items (gates) are not included)
 
@@ -263,7 +263,7 @@ bool isReactorBlock(const string &in blockName, int index, const vec3 &in blockP
         waterDeep.Find(blockName) >= 0) {
 
         vec3 blockPos = CoordToPos(blockPosition);
-        reactorBlocks.InsertLast(ReactorBlockInfo(blockPos, index));
+        reactorBlocks.InsertLast(AllCurrentReactorBlocks(blockPos, index));
         return true;
     }
     return false;
