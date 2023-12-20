@@ -24,13 +24,13 @@ void legacyReactorCalculations(CSceneVehicleVisState@ state) {
         // print(ReactorFinalCountdown);
 
         if (isReactorActive()) { print("Reactor is active"); } else { print("Reactor is not active"); };
-        if (isGroundContectMaterialConditionMet()) { print("Ground contact material condition is met"); } else { print("Ground contact material condition is not met"); };
+        if (isGroundContectMaterialConditionMet(state)) { print("Ground contact material condition is met"); } else { print("Ground contact material condition is not met"); };
         if (reactorIsNotOldReactor()) { print("reactor is not old reactor"); } else { print("reactor is old reactor"); };
         print(newReactorLevel + " " + newReactorType);
         print(newReactorType + " " + PreviousReactorType + " a " + newReactorLevel + " " + PreviousReactorLevel);
 
 
-        if ((isReactorActive()) or (isGroundContectMaterialConditionMet()) or (reactorIsNotOldReactor())) {
+        if ((isReactorActive()) or (isGroundContectMaterialConditionMet(state)) or (reactorIsNotOldReactor())) {
                 resetReactorCountdown();
         } else {
             CountdownTime -= 1;
