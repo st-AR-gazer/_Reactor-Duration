@@ -117,7 +117,7 @@ void materialCalculations(CSceneVehicleVisState@ state) {
     auto RLMaterial = state.RLGroundContactMaterial;
 
     print(state.FRGroundContactMaterial + " " + state.FLGroundContactMaterial + " " + state.RRGroundContactMaterial + " " + state.RLGroundContactMaterial);
-    print("^^^^^¨");
+    print("^^^^^¨"); 
 
     if (FRMaterial != 4 && FRMaterial != 9 && FRMaterial != 80) {
         PreviousFRMaterial = FRMaterial;
