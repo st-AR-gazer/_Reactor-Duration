@@ -33,7 +33,7 @@ void legacyReactorCalculations(CSceneVehicleVisState@ state) {
 }
 
 bool isReactorActive(CSceneVehicleVisState@ state) {
-    if (state.ReactorBoostLvl != 0) return true;
+    if (ReactorLevel != 0) return true;
     return false;
 }
 
