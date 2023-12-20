@@ -205,7 +205,7 @@ array<int> reactorBlockIndices;
 
 // #endregion
 
-void reactorBlockHitboxCalculationsBlock() {
+void reactorBlockHitboxCalculationsBlock(CSceneVehicleVisState@ state) {
     CTrackMania@ app = cast<CTrackMania>(GetApp());
     if (app is null) {
         return;
@@ -217,7 +217,7 @@ void reactorBlockHitboxCalculationsBlock() {
         return;
     }
 
-    checkCarPosition();
+    checkCarPosition(state);
     
     if (hasCalculatedReactorBlocks) {
         return;
