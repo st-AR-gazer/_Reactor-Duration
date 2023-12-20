@@ -32,7 +32,7 @@ void legacyReactorCalculations(CSceneVehicleVisState@ state) {
     } catch { }
 }
 
-bool isReactorActive(CSceneVehicleVisState@ state) {
+bool isReactorActive() {
     if (ReactorLevel != 0) return true;
     return false;
 }
