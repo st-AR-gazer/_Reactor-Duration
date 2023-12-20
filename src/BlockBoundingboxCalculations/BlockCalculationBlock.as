@@ -1,21 +1,11 @@
 bool hasCalculatedReactorBlocks = false;
 
-class ReactorBlock {
-    string name;
-    vec3 gridPosition;  // Original grid position
-    vec3 worldPosition; // Converted world position
-    int blockIndex;     // Index of the block
+array<array<auto>> reactorBlocks;
 
-    ReactorBlock(const string &in blockName, const vec3 &in gridPos, int index) {
-        name = blockName;
-        gridPosition = gridPos;
-        worldPosition = CoordToPos(gridPos);
-        blockIndex = index;
-    }
-}
-
-array<int> test;
-array<ReactorBlock> reactorBlocks;
+array<string> reactorBlockNames;
+array<vec3> reactorBlockGridPositions;
+array<vec3> reactorBlockWorldPositions;
+array<int> reactorBlockIndices;
 
 
 // #region All reactor granting BLOCKS (wood is not implemented yet xdd), (Items (gates) are not included)
@@ -229,13 +219,16 @@ void reactorBlockHitboxCalculationsBlock() {
 
     auto blocksArray = map.Blocks;
 
-
     for (uint i = 0; i < blocksArray.Length; i++) {
         string blockName = blocksArray[i].BlockInfo.Name;
-        vec3 blockPosition = blocksArray[i].Coord;
+        vec3 blockCoord = blocksArray[i].Coord;
 
         if (isReactorBlock(blockName)) {
-            reactorBlocks.InsertLast(ReactorBlock(blockName, blockPosition, i));
+            vec3 blockPos = CoordToPos(blockCoord);
+            reactorBlockNames.InsertLast(blockName);
+            reactorBlockGridPositions.InsertLast(blockCoord);
+            reactorBlockWorldPositions.InsertLast(blockPos);
+            reactorBlockIndices.InsertLast(i);
         }
     }
 
@@ -272,7 +265,9 @@ void checkCarPosition() {
     vec3 carPosition = vec3(carPositionX, carPositionY, carPositionZ);
 
     for (uint i = 0; i < reactorBlocks.Length; i++) {
-        if (isNear(carPosition, reactorBlocks[i].worldPosition)) {
+        vec3 blockWorldPosition = reactorBlocks[i][2];
+        
+        if (isNear(carPosition, blockWorldPosition)) {
             resetReactorCountdown();
             break;
         }
