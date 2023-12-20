@@ -30,7 +30,8 @@ void legacyReactorCalculations(CSceneVehicleVisState@ state) {
         if ((isReactorActive(state)) or (isGroundContectMaterialConditionMet(state))/* or (reactorIsNotOldReactor())*/) {
                 resetReactorCountdown();
         } else {
-            CountdownTime -= 2000;
+            CountdownTime = 6000;
+            print("happens");
         }
         
     } catch { }
