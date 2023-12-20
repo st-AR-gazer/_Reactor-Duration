@@ -22,7 +22,9 @@ uint newReactorLevel;
 uint newReactorType;
 
 void legacyReactorCalculations(CSceneVehicleVisState@ state) {
+    print(FRMaterial + " " + FLMaterial + " " + RRMaterial + " " + RLMaterial + "bbbbbbbbbbbbbb");
     materialCalculations(state);
+    print(FRMaterial + " " + FLMaterial + " " + RRMaterial + " " + RLMaterial + "aaaaa");
     reactorCalculations(state);
     try {
         ReactorFinalCountdown = Dev::GetOffsetFloat(state, 380);
