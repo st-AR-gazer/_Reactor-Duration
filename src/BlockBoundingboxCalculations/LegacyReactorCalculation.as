@@ -63,7 +63,8 @@ bool isGroundContectMaterialConditionMet(CSceneVehicleVisState@ state) {
 
 void resetReactorCountdown() {
     print("reset happens");
-    if (newReactorLevel != 0) {
+    print(ReactorLevel)
+    if (ReactorLevel != 0) {
     print("first hurdle");
 
         if (ReactorFinalCountdown == 0.01 or ReactorFinalCountdown == 0.05) {
