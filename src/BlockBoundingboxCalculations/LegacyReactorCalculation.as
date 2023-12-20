@@ -62,7 +62,7 @@ bool reactorIsNotOldReactor() {
 }
 
 void resetReactorCountdown() {
-    if (ReactorLevel == 1 or ReactorLevel == 2) {
+    if (newReactorLevel != 0) {
         if (ReactorFinalCountdown == 0.01 or ReactorFinalCountdown == 0.05) {
             CountdownTime = 950;
         } else {
@@ -71,8 +71,8 @@ void resetReactorCountdown() {
     } else {
         CountdownTime = 0;
     }
-
-    /*if (() 
+/*
+    if (() 
             or 
                 (((FRMaterial == 4 or FLMaterial == 4 or RRMaterial == 4 or RLMaterial == 4 or FRMaterial == 9 or FLMaterial == 9 or RRMaterial == 9 or RLMaterial == 9) 
                 and 
@@ -88,16 +88,18 @@ void resetReactorCountdown() {
             or 
             (newReactorLevel != PreviousReactorLevel)) {
 
-                if (newReactorLevel != 0) {
-                    if (ReactorFinalCountdown == 0.01 or ReactorFinalCountdown == 0.05) {
-                        CountdownTime = 950;
-                    } else {
-                        CountdownTime = 6000;
-                    }
-                } else {
-                    CountdownTime = 0;
-                }
-            }*/
+        if (newReactorLevel != 0) {
+            if (ReactorFinalCountdown == 0.01 or ReactorFinalCountdown == 0.05) {
+                CountdownTime = 950;
+            } else {
+                CountdownTime = 6000;
+            }
+        } else {
+            CountdownTime = 0;
+        }
+    }
+*/
+
 }
 
 void materialCalculations(CSceneVehicleVisState@ state) {
