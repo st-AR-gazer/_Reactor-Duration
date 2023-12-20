@@ -78,9 +78,6 @@ void resetReactorCountdown() {
     auto scene = cast<ISceneVis@>(app.GameScene);
     if (scene is null) return;
 
-    auto port = cast<CInputPort@>(app.InputPort);
-    if (port is null) return;
-
     CSceneVehicleVis@ vis;
     auto player = cast<CSmPlayer@>(playground.GameTerminals[0].GUIPlayer);
     if (player !is null) {
