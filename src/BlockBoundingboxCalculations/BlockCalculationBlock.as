@@ -267,6 +267,8 @@ void checkCarPosition() {
 
     for (uint i = 0; i < reactorBlockWorldPositions.Length; i++) {
         if (isNear(carPosition, reactorBlockWorldPositions[i])) {
+    print(32 + " " + (carPosition - reactorBlockWorldPositions[i]).Length() + " " + carPosition + " " + reactorBlockWorldPositions[i] + " " + carPositionX + " " + carPositionY + " " + carPositionZ);
+
             resetReactorCountdown();
             break;
         }
@@ -275,7 +277,6 @@ void checkCarPosition() {
 
 bool isNear(const vec3 &in pos1, const vec3 &in pos2) {
     float threshold = 32;
-    print(threshold + " " + (pos1 - pos2).Length() + " " + pos1 + " " + pos2 + " " + carPositionX + " " + carPositionY + " " + carPositionZ);
     return (pos1 - pos2).Length() <= threshold;
 
 }
