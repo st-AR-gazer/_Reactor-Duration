@@ -24,7 +24,7 @@ void legacyReactorCalculations(CSceneVehicleVisState@ state) {
         // print(ReactorFinalCountdown);
 
         if ((isReactorActive(state)) or (isGroundContectMaterialConditionMet(state))/* or (reactorIsNotOldReactor())*/) {
-                resetReactorCountdown();
+                resetReactorCountdown(state);
         } else {
             CountdownTime -= 1;
         }
@@ -61,10 +61,10 @@ bool isGroundContectMaterialConditionMet(CSceneVehicleVisState@ state) {
     return false;
 }*/
 
-void resetReactorCountdown() {
+void resetReactorCountdown(CSceneVehicleVisState@ state) {
     print("reset happens");
-    print(ReactorLevel);
-    if (ReactorLevel != 0) {
+    print(state.ReactorBoostLvl);
+    if (state.ReactorBoostLvl != 0) {
     print("first hurdle");
 
         if (ReactorFinalCountdown == 0.01 or ReactorFinalCountdown == 0.05) {
