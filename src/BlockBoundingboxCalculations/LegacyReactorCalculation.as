@@ -31,6 +31,10 @@ void legacyReactorCalculations(CSceneVehicleVisState@ state) {
         if (isReactorActive()) { print("Reactor is active"); } else { print("Reactor is not active"); };
         if (isGroundContectMaterialConditionMet()) { print("Ground contact material condition is met"); } else { print("Ground contact material condition is not met"); };
         if (reactorIsNotOldReactor()) { print("reactor is not old reactor"); } else { print("reactor is old reactor"); };
+        print(newReactorLevel + " " + newReactorType);
+        print(FRMaterial + " " + FLMaterial + " " + RRMaterial + " " + RLMaterial);
+        print(newReactorType != PreviousReactorType + " " + newReactorLevel != PreviousReactorLevel)
+
 
         if ((isReactorActive()) or (isGroundContectMaterialConditionMet()) or (reactorIsNotOldReactor())) {
                 resetReactorCountdown();
@@ -47,7 +51,6 @@ bool isReactorActive() {
 }
 
 bool isGroundContectMaterialConditionMet() {
-    print(FRMaterial + " " + FLMaterial + " " + RRMaterial + " " + RLMaterial);
     if (FRMaterial == 0 or FLMaterial == 0 or RRMaterial == 0 or RLMaterial == 0) return true;
     
     if (((FRMaterial == 4 or FLMaterial == 4 or RRMaterial == 4 or RLMaterial == 4) or (FRMaterial == 9 or FLMaterial == 9 or RRMaterial == 9 or RLMaterial == 9)) 
