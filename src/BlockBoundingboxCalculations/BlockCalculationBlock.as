@@ -271,11 +271,13 @@ void checkCarPosition() {
 
     for (uint i = 0; i < reactorBlockWorldPositions.Length; i++) {
         if (isNear(carPosition, reactorBlockWorldPositions[i])) {
+            auto x = carPosition - reactorBlockWorldPositions[i].Length();
             print("Threshold " + 32);
-            print("Distance from i target " + carPosition - reactorBlockWorldPositions[i].Length());
-            print(carPosition);
-            print(reactorBlockWorldPositions[i]);
-            print(carPositionX + " " + carPositionY + " " + carPositionZ);
+            print("Distance from i target " + vec3(carPosition - reactorBlockWorldPositions[i].Length()));
+            print("Distance from i target " + vec3(x));
+            print("Car Position " + carPosition);
+            print("Reactor Position" + reactorBlockWorldPositions[i]);
+            print("Car Position 2 " + carPositionX + " " + carPositionY + " " + carPositionZ);
 
             resetReactorCountdown();
             break;
