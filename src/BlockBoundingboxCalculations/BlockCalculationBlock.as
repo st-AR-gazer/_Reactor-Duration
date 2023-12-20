@@ -277,7 +277,6 @@ void cacheReactorBlocks() {
 }
 
 void checkCarPosition() {
-    log("checkCarPosition: Start", LogLevel::Info, 278);
     vec3 carPosition = vec3(carPositionX, carPositionY, carPositionZ);
 
     for (uint i = 0; i < reactorBlockWorldPositions.Length; i++) {
@@ -287,7 +286,6 @@ void checkCarPosition() {
             break;
         }
     }
-    log("checkCarPosition: End", LogLevel::Info, 288);
 }
 
 bool isCarWithinBoundingBox(const vec3 &in carPos, const vec3 &in blockPos) {
