@@ -273,61 +273,6 @@ shared vec3 CoordToPos(nat3 coord) {
     return vec3(coord.x * 32, (int(coord.y) - 8) * 8, coord.z * 32);
 }
 
-/* Old code = bad
-    bool isReactorBlock(const string &in blockName, int index, const vec3 &in blockPosition) {
-    if (roadFlat.Find(blockName) >= 0) {
-        reactorBlocks.InsertLast(ReactorBlockInfo(blockPosition, index));
-        return true;
-    } else if (roadSlopeUp.Find(blockName) >= 0) {
-        // Logic for Road Slope Up blocks
-    } else if (roadSlopeDown.Find(blockName) >= 0) {
-        // Logic for Road Slope Down blocks
-    } else if (roadTiltLeft.Find(blockName) >= 0) {
-        // Logic for Road Tilt Left blocks
-    } else if (roadTiltRight.Find(blockName) >= 0) {
-        // Logic for Road Tilt Right blocks
-    } else if (roadDiagLeft.Find(blockName) >= 0) {
-        // Logic for Road Diag Left blocks
-    } else if (roadDiagRight.Find(blockName) >= 0) {
-        // Logic for Road Diag Right blocks
-    } else if (bankedDirt.Find(blockName) >= 0) {
-        // Logic for Banked Dirt blocks
-    } else if (bankedDirtSlopeUp.Find(blockName) >= 0) {
-        // Logic for Banked Dirt Slope Up blocks
-    } else if (bankedDirtSlopeDown.Find(blockName) >= 0) {
-        // Logic for Banked Dirt Slope Down blocks
-    } else if (bankedDirtTiltLeft.Find(blockName) >= 0) {
-        // Logic for Banked Dirt Tilt Left blocks
-    } else if (bankedDirtTiltRight.Find(blockName) >= 0) {
-        // Logic for Banked Dirt Tilt Right blocks
-    } else if (sausageFlat.Find(blockName) >= 0) {
-        // Logic for Sausage blocks
-    } else if (sausageSlopeUp.Find(blockName) >= 0) {
-        // Logic for Sausage Slope Up blocks
-    } else if (sausageSlopeDown.Find(blockName) >= 0) {
-        // Logic for Sausage Slope Down blocks
-    } else if (sausageTiltLeft.Find(blockName) >= 0) {
-        // Logic for Sausage Tilt Left blocks
-    } else if (sausageTiltRight.Find(blockName) >= 0) {
-        // Logic for Sausage Tilt Right blocks
-    } else if (bobsleighFlat.Find(blockName) >= 0) {
-        // Logic for Bobsleigh blocks
-    } else if (bobsleighSlopeUp.Find(blockName) >= 0) {
-        // Logic for Bobsleigh Slope Up blocks
-    } else if (bobsleighSlopeDown.Find(blockName) >= 0) {
-        // Logic for Bobsleigh Slope Down blocks
-    } else if (bobsleighTiltLeft.Find(blockName) >= 0) {
-        // Logic for Bobsleigh Tilt Left blocks
-    } else if (bobsleighTiltRight.Find(blockName) >= 0) {
-        // Logic for Bobsleigh Tilt Right blocks
-
-    //
-    } else if (platformFlat.Find(blockName) >= 0) {
-       
-    } 
-    }
-*/
-
 void cacheReactorBlocks() {
     //some cacheing stuff goes here if I bother implementing it
 }
