@@ -30,7 +30,7 @@ void legacyReactorCalculations(CSceneVehicleVisState@ state) {
         print(newReactorType + " " + PreviousReactorType + " a " + newReactorLevel + " " + PreviousReactorLevel);
 
 
-        if ((isReactorActive()) or (isGroundContectMaterialConditionMet(state)) or (reactorIsNotOldReactor())) {
+        if ((isReactorActive(state)) or (isGroundContectMaterialConditionMet(state)) or (reactorIsNotOldReactor())) {
                 resetReactorCountdown();
         } else {
             CountdownTime -= 1;
@@ -39,8 +39,8 @@ void legacyReactorCalculations(CSceneVehicleVisState@ state) {
     } catch { }
 }
 
-bool isReactorActive() {
-    if (newReactorLevel != 0 or newReactorType != 0) return true;
+bool isReactorActive(CSceneVehicleVisState@ state) {
+    if (state.ReactorBoostLvl != 0) return true;
     return false;
 }
 
