@@ -269,7 +269,7 @@ bool isReactorBlock(const string &in blockName, int index, const vec3 &in blockP
     return false;
 }
 
-shared vec3 CoordToPos(nat3 coord) {
+shared vec3 CoordToPos(vec3 coord) {
     return vec3(coord.x * 32, (int(coord.y) - 8) * 8, coord.z * 32);
 }
 
