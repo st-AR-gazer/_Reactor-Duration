@@ -17,6 +17,7 @@ uint newReactorLevel;
 uint newReactorType;
 
 void legacyReactorCalculations(CSceneVehicleVisState@ state) {
+    print("legacyReactorCalculations called");
     materialCalculations(state);
     reactorCalculations(state);
     try {
@@ -24,6 +25,7 @@ void legacyReactorCalculations(CSceneVehicleVisState@ state) {
         // print(ReactorFinalCountdown);
 
         if ((isReactorActive(state)) or (isGroundContectMaterialConditionMet(state))/* or (reactorIsNotOldReactor())*/) {
+                print("resetting");
                 resetReactorCountdown();
         } else {
             CountdownTime -= 1;
