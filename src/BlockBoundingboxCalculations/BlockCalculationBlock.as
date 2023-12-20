@@ -9,11 +9,12 @@ class ReactorBlock {
     ReactorBlock(const string &in blockName, const vec3 &in gridPos, int index) {
         name = blockName;
         gridPosition = gridPos;
-        worldPosition = CoordToPos(gridPos); // Convert coordinates to world position
+        worldPosition = CoordToPos(gridPos);
         blockIndex = index;
     }
 }
 
+array<int> test;
 array<ReactorBlock> reactorBlocks;
 
 
