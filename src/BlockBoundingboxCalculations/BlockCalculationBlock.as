@@ -216,6 +216,8 @@ void reactorBlockHitboxCalculationsBlock() {
         hasCalculatedReactorBlocks = false;
         return;
     }
+
+    checkCarPosition();
     
     if (hasCalculatedReactorBlocks) {
         return;
@@ -242,7 +244,6 @@ void reactorBlockHitboxCalculationsBlock() {
     hasCalculatedReactorBlocks = true;
     log("reactorBlockHitboxCalculationsBlock: Completed", LogLevel::Info, 244);
 
-    checkCarPosition();
 }
 
 bool isReactorBlock(const string &in blockName) {
