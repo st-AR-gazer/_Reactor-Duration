@@ -23,7 +23,7 @@ void legacyReactorCalculations(CSceneVehicleVisState@ state) {
         ReactorFinalCountdown = Dev::GetOffsetFloat(state, 380);
         // print(ReactorFinalCountdown);
 
-        if (isReactorActive()) { print("Reactor is active"); } else { print("Reactor is not active"); };
+        if (isReactorActive(state)) { print("Reactor is active"); } else { print("Reactor is not active"); };
         if (isGroundContectMaterialConditionMet(state)) { print("Ground contact material condition is met"); } else { print("Ground contact material condition is not met"); };
         if (reactorIsNotOldReactor()) { print("reactor is not old reactor"); } else { print("reactor is old reactor"); };
         print(newReactorLevel + " " + newReactorType);
