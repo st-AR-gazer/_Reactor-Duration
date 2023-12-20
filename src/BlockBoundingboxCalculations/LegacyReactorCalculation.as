@@ -46,8 +46,6 @@ bool isGroundContectMaterialConditionMet(CSceneVehicleVisState@ state) {
     auto FLMaterial = state.FRGroundContactMaterial;
     auto RRMaterial = state.RRGroundContactMaterial;
     auto RLMaterial = state.RLGroundContactMaterial;
-        print(FRMaterial + " " + FLMaterial + " " + RRMaterial + " " + RLMaterial + "aaaaaa");
-
 
     if (FRMaterial == 0 or FLMaterial == 0 or RRMaterial == 0 or RLMaterial == 0) return true;
     
@@ -97,9 +95,6 @@ void materialCalculations(CSceneVehicleVisState@ state) {
     if (RLMaterial != 4 && RLMaterial != 9 && RLMaterial != 80) {
         PreviousRLMaterial = RLMaterial;
     }
-
-    print(FRMaterial + " " + FLMaterial + " " + RRMaterial + " " + RLMaterial);
-
 }
 
 void reactorCalculations(CSceneVehicleVisState@ state) {
