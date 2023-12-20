@@ -220,7 +220,7 @@ void reactorBlockHitboxCalculationsBlock() {
     if (hasCalculatedReactorBlocks) {
         return;
     }
-
+    
     auto blocksArray = map.Blocks;
     log("reactorBlockHitboxCalculationsBlock: Processing " + blocksArray.Length + " blocks", LogLevel::Info, 226);
 
@@ -241,6 +241,8 @@ void reactorBlockHitboxCalculationsBlock() {
 
     hasCalculatedReactorBlocks = true;
     log("reactorBlockHitboxCalculationsBlock: Completed", LogLevel::Info, 244);
+
+    checkCarPosition();
 }
 
 bool isReactorBlock(const string &in blockName) {
