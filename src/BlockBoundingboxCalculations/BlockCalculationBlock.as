@@ -1,7 +1,5 @@
 bool hasCalculatedReactorBlocks = false;
 
-array<array<auto>> reactorBlocks;
-
 array<string> reactorBlockNames;
 array<vec3> reactorBlockGridPositions;
 array<vec3> reactorBlockWorldPositions;
@@ -264,10 +262,8 @@ void cacheReactorBlocks() {
 void checkCarPosition() {
     vec3 carPosition = vec3(carPositionX, carPositionY, carPositionZ);
 
-    for (uint i = 0; i < reactorBlocks.Length; i++) {
-        vec3 blockWorldPosition = reactorBlocks[i][2];
-        
-        if (isNear(carPosition, blockWorldPosition)) {
+    for (uint i = 0; i < reactorBlockWorldPositions.Length; i++) {
+        if (isNear(carPosition, reactorBlockWorldPositions[i])) {
             resetReactorCountdown();
             break;
         }
