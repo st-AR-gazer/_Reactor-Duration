@@ -1,24 +1,21 @@
 bool hasCalculatedReactorBlocks = false;
 
-class BlockInfo {
+class ReactorBlock {
     string name;
-    vec3 coordinates;
-}
+    vec3 gridPosition;  // Original grid position
+    vec3 worldPosition; // Converted world position
+    int blockIndex;     // Index of the block
 
-class ReactorBlockInfo {
-    vec3 coordinates;
-    int blockIndex;
-    vec3 blockPos;
-
-    ReactorBlockInfo(const vec3 &in coords, int index, const vec3 &in pos) {
-        coordinates = coords;
+    ReactorBlock(const string &in blockName, const vec3 &in gridPos, int index) {
+        name = blockName;
+        gridPosition = gridPos;
+        worldPosition = CoordToPos(gridPos); // Convert coordinates to world position
         blockIndex = index;
-        blockPos = pos;
     }
 }
 
-array<BlockInfo> reactorBlocks;
-array<ReactorBlockInfo> blocks;
+array<ReactorBlock> reactorBlocks;
+
 
 // #region All reactor granting BLOCKS (wood is not implemented yet xdd), (Items (gates) are not included)
 
@@ -235,40 +232,31 @@ void reactorBlockHitboxCalculationsBlock() {
     for (uint i = 0; i < blocksArray.Length; i++) {
         string blockName = blocksArray[i].BlockInfo.Name;
         vec3 blockPosition = blocksArray[i].Coord;
-        
-        if (isReactorBlock(blockName, i, blockPosition)) {
-            BlockInfo blockInfo;
-            blockInfo.name = blockName;
-            blockInfo.coordinates = blockPosition;
-            blocks.InsertLast(blockInfo);
+
+        if (isReactorBlock(blockName)) {
+            reactorBlocks.InsertLast(ReactorBlock(blockName, blockPosition, i));
         }
     }
 
     hasCalculatedReactorBlocks = true;
 }
 
-bool isReactorBlock(const string &in blockName, int index, const vec3 &in blockPosition) {
-    if (roadFlat.Find(blockName) >= 0 || roadSlopeUp.Find(blockName) >= 0 || 
-        roadSlopeDown.Find(blockName) >= 0 || roadTiltLeft.Find(blockName) >= 0 || 
-        roadTiltRight.Find(blockName) >= 0 || roadDiagLeft.Find(blockName) >= 0 || 
-        roadDiagRight.Find(blockName) >= 0 || bankedDirt.Find(blockName) >= 0 || 
-        bankedDirtSlopeUp.Find(blockName) >= 0 || bankedDirtSlopeDown.Find(blockName) >= 0 || 
-        bankedDirtTiltLeft.Find(blockName) >= 0 || bankedDirtTiltRight.Find(blockName) >= 0 || 
-        sausageFlat.Find(blockName) >= 0 || sausageSlopeUp.Find(blockName) >= 0 || 
-        sausageSlopeDown.Find(blockName) >= 0 || sausageTiltLeft.Find(blockName) >= 0 || 
-        sausageTiltRight.Find(blockName) >= 0 || bobsleighFlat.Find(blockName) >= 0 || 
-        bobsleighSlopeUp.Find(blockName) >= 0 || bobsleighSlopeDown.Find(blockName) >= 0 || 
-        bobsleighTiltLeft.Find(blockName) >= 0 || bobsleighTiltRight.Find(blockName) >= 0 || 
-        platformFlat.Find(blockName) >= 0 || platformSlopeUp.Find(blockName) >= 0 || 
-        platformSlopeDown.Find(blockName) >= 0 || platformTiltRight.Find(blockName) >= 0 || 
-        platformTiltLeft.Find(blockName) >= 0 || waterShallow.Find(blockName) >= 0 || 
-        waterDeep.Find(blockName) >= 0) {
-
-        vec3 blockPos = CoordToPos(blockPosition);
-        reactorBlocks.InsertLast(ReactorBlockInfo(blockPos, index, blockPosition));
-        return true;
-    }
-    return false;
+bool isReactorBlock(const string &in blockName) {
+    return roadFlat.Find(blockName) >= 0 || roadSlopeUp.Find(blockName) >= 0 || 
+           roadSlopeDown.Find(blockName) >= 0 || roadTiltLeft.Find(blockName) >= 0 || 
+           roadTiltRight.Find(blockName) >= 0 || roadDiagLeft.Find(blockName) >= 0 || 
+           roadDiagRight.Find(blockName) >= 0 || bankedDirt.Find(blockName) >= 0 || 
+           bankedDirtSlopeUp.Find(blockName) >= 0 || bankedDirtSlopeDown.Find(blockName) >= 0 || 
+           bankedDirtTiltLeft.Find(blockName) >= 0 || bankedDirtTiltRight.Find(blockName) >= 0 || 
+           sausageFlat.Find(blockName) >= 0 || sausageSlopeUp.Find(blockName) >= 0 || 
+           sausageSlopeDown.Find(blockName) >= 0 || sausageTiltLeft.Find(blockName) >= 0 || 
+           sausageTiltRight.Find(blockName) >= 0 || bobsleighFlat.Find(blockName) >= 0 || 
+           bobsleighSlopeUp.Find(blockName) >= 0 || bobsleighSlopeDown.Find(blockName) >= 0 || 
+           bobsleighTiltLeft.Find(blockName) >= 0 || bobsleighTiltRight.Find(blockName) >= 0 || 
+           platformFlat.Find(blockName) >= 0 || platformSlopeUp.Find(blockName) >= 0 || 
+           platformSlopeDown.Find(blockName) >= 0 || platformTiltRight.Find(blockName) >= 0 || 
+           platformTiltLeft.Find(blockName) >= 0 || waterShallow.Find(blockName) >= 0 || 
+           waterDeep.Find(blockName) >= 0;
 }
 
 shared vec3 CoordToPos(vec3 coord) {
@@ -283,7 +271,7 @@ void checkCarPosition() {
     vec3 carPosition = vec3(carPositionX, carPositionY, carPositionZ);
 
     for (uint i = 0; i < reactorBlocks.Length; i++) {
-        if (isNear(carPosition, reactorBlocks[i].coordinates)) {
+        if (isNear(carPosition, reactorBlocks[i].worldPosition)) {
             resetReactorCountdown();
             break;
         }
