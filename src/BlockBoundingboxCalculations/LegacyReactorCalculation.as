@@ -42,7 +42,7 @@ void legacyReactorCalculations(CSceneVehicleVisState@ state) {
 }
 
 bool isReactorActive() {
-    if ((newReactorLevel != 0 or newReactorType != 0) and (ReactorLevel == 0 and ReactorType == 0)) return true;
+    if (newReactorLevel != 0 or newReactorType != 0) return true;
     return false;
 }
 
