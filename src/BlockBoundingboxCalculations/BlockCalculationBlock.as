@@ -205,7 +205,7 @@ array<int> reactorBlockIndices;
 
 // #endregion
 
-void reactorBlockHitboxCalculationsBlock(CSceneVehicleVisState@ state) {
+void reactorBlockHitboxCalculationsBlock() {
     CTrackMania@ app = cast<CTrackMania>(GetApp());
     if (app is null) {
         return;
@@ -217,7 +217,7 @@ void reactorBlockHitboxCalculationsBlock(CSceneVehicleVisState@ state) {
         return;
     }
 
-    checkCarPosition(state);
+    checkCarPosition();
     
     if (hasCalculatedReactorBlocks) {
         return;
@@ -276,13 +276,13 @@ void cacheReactorBlocks() {
     // ...
 }
 
-void checkCarPosition(CSceneVehicleVisState@ state) {
+void checkCarPosition() {
     vec3 carPosition = vec3(carPositionX, carPositionY, carPositionZ);
 
     for (uint i = 0; i < reactorBlockWorldPositions.Length; i++) {
         if (isCarWithinBoundingBox(carPosition, reactorBlockWorldPositions[i])) {
             log("checkCarPosition: Car is within bounding box of reactor block at position: " + reactorBlockWorldPositions[i].ToString(), LogLevel::Warn, 284);
-            resetReactorCountdown(state);
+            resetReactorCountdown();
             break;
         }
     }
