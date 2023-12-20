@@ -47,6 +47,7 @@ bool isReactorActive() {
 }
 
 bool isGroundContectMaterialConditionMet() {
+    print(FRMaterial + " " + FLMaterial + " " + RRMaterial + " " + RLMaterial);
     if (FRMaterial == 0 or FLMaterial == 0 or RRMaterial == 0 or RLMaterial == 0) return true;
     
     if (((FRMaterial == 4 or FLMaterial == 4 or RRMaterial == 4 or RLMaterial == 4) or (FRMaterial == 9 or FLMaterial == 9 or RRMaterial == 9 or RLMaterial == 9)) 
