@@ -219,7 +219,10 @@ void reactorBlockHitboxCalculationsBlock() {
 
     for (uint i = 0; i < blocksArray.Length; i++) {
         string blockName = blocksArray[i].BlockInfo.Name;
-        vec3 blockCoord = blocksArray[i].Coord;
+        uint x = blocksArray[i].CoordX;
+        uint y = blocksArray[i].CoordY;
+        uint z = blocksArray[i].CoordZ;
+        vec3 blockCoord = vec3(x, y, z);
 
         if (isReactorBlock(blockName)) {
             vec3 blockPos = CoordToPos(blockCoord);
