@@ -29,9 +29,9 @@ void legacyReactorCalculations(CSceneVehicleVisState@ state) {
 
         if ((isReactorActive(state)) or (isGroundContectMaterialConditionMet(state))/* or (reactorIsNotOldReactor())*/) {
                 resetReactorCountdown();
+                print("happens");
         } else {
-            CountdownTime = 6000;
-            print("happens");
+            CountdownTime -= 1;
         }
         
     } catch { }
@@ -67,6 +67,7 @@ bool isGroundContectMaterialConditionMet(CSceneVehicleVisState@ state) {
 }*/
 
 void resetReactorCountdown() {
+    print("reset happens");
     if (newReactorLevel != 0) {
         if (ReactorFinalCountdown == 0.01 or ReactorFinalCountdown == 0.05) {
             CountdownTime = 950;
