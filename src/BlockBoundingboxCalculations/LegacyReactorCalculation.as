@@ -1,8 +1,5 @@
 float ReactorFinalCountdown;
 
-uint PreviousReactorLevel;
-uint PreviousReactorType;
-
 uint PreviousFRMaterial;
 uint PreviousFLMaterial;
 uint PreviousRRMaterial;
@@ -13,9 +10,6 @@ float FLDamperLen;
 float RRDamperLen;
 float RLDamperLen;
 
-uint newReactorLevel;
-uint newReactorType;
-
 void legacyReactorCalculations(CSceneVehicleVisState@ state) {
     materialCalculations(state);
     reactorCalculations(state);
@@ -23,13 +17,18 @@ void legacyReactorCalculations(CSceneVehicleVisState@ state) {
         ReactorFinalCountdown = Dev::GetOffsetFloat(state, 380);
         // print(ReactorFinalCountdown);
 
-        if ((isGroundContectMaterialConditionMet(state))/* or (reactorIsNotOldReactor())*/) {
+        if ((reactorOffToOnCheck()) or (isGroundContectMaterialConditionMet(state))/* or (reactorIsNotOldReactor())*/) {
                 resetReactorCountdown();
         } else {
             CountdownTime -= 1;
         }
         
     } catch { }
+}
+
+bool reactorOffToOnCheck() {
+    if (ReactorLevel != PreviousReactorLevel && ReactorLevel != 0) return true;
+    return false;
 }
 
 bool isReactorActive() {
@@ -56,10 +55,10 @@ bool isGroundContectMaterialConditionMet(CSceneVehicleVisState@ state) {
     return false;
 } 
 
-/*bool reactorIsNotOldReactor() {
-    if ((newReactorType != PreviousReactorType) or (newReactorLevel != PreviousReactorLevel)) return true;
-    return false;
-}*/
+// bool reactorIsNotOldReactor() {
+    // if ((ReactorType != PreviousReactorType) or (ReactorLevel != PreviousReactorLevel)) return true;
+    // return false;
+// }
 
 void resetReactorCountdown() {
     if (isReactorActive()) {
@@ -101,12 +100,4 @@ void reactorCalculations(CSceneVehicleVisState@ state) {
     if (ReactorFinalCountdown >= 0.001 && ReactorFinalCountdown <= 0.051) {
         CountdownTime = 950;
     }
-
-    uint newReactorLevel = uint(state.ReactorBoostLvl);
-    uint newReactorType  = uint(state.ReactorBoostType);
-
-    ReactorLevel = newReactorLevel;
-    ReactorType  = newReactorType;
-    PreviousReactorLevel = newReactorLevel;
-    PreviousReactorType  = newReactorType;
 }

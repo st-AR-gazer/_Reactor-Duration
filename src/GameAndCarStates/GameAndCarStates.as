@@ -14,6 +14,9 @@ uint ReactorLevel;
 uint ReactorType;
 bool isReactorLevelZero;
 
+uint PreviousReactorLevel;
+uint PreviousReactorType;
+
 // Handicaps (Future remove)
 float noGas;
 float forceGas;
@@ -25,6 +28,16 @@ float carPositionX;
 float carPositionY;
 float carPositionZ;
 
+bool isTouchingGround;
+
+
+vec3 carPosition;
+vec3 carOrientation;
+float carPitch;
+float carRoll;
+float carYaw;
+
+
 void getCarStates(CSmScriptPlayer@ script, CSceneVehicleVisState@ state) {
     // World position
     worldPossX = script.Position.x;
@@ -35,9 +48,24 @@ void getCarStates(CSmScriptPlayer@ script, CSceneVehicleVisState@ state) {
     carPositionY = script.Position.y;
     carPositionZ = script.Position.z;
 
+    carPosition = script.Position;
+    carPitch = script.AimPitch;
+    carRoll = script.AimRoll;
+    carYaw = script.AimYaw;
+    carOrientation = script.AimDirection;
+
+    // print(carOrientation.x + " " + carOrientation.y + " " + carOrientation.z + " ");
+
+    // vec3(carOrientation) = vec3(carPitch, 0, 0); 
     // Reactor states
+
+    PreviousReactorLevel = ReactorLevel;
+    PreviousReactorType = ReactorType;
+
     ReactorLevel = state.ReactorBoostLvl;
     ReactorType = state.ReactorBoostType;
+
+    isTouchingGround = state.IsGroundContact;
 
     if (ReactorLevel != 0 && isReactorLevelZero) {
         oldWorldPossX = worldPossX; 

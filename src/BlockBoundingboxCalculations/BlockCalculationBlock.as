@@ -278,23 +278,33 @@ void cacheReactorBlocks() {
 
 void checkCarPosition() {
     vec3 carPosition = vec3(carPositionX, carPositionY, carPositionZ);
+    vec3 carOrientation = vec3(carOrientation.x, carOrientation.y, carOrientation.z);
+
+    array<vec3> carCorners = calculateCarBoundingBox(carPosition, carOrientation);
+    print(carCorners);
 
     for (uint i = 0; i < reactorBlockWorldPositions.Length; i++) {
-        if (isCarWithinBoundingBox(carPosition, reactorBlockWorldPositions[i])) {
-            log("checkCarPosition: Car is within bounding box of reactor block at position: " + reactorBlockWorldPositions[i].ToString(), LogLevel::Warn, 284);
-            resetReactorCountdown();
+        if (isCarWithinBoundingBox(carCorners, reactorBlockWorldPositions[i])) {
+            if (isTouchingGround) {
+                if (ReactorType == 1 && ReactorLevel == 2) return;
+                resetReactorCountdown();
+            }
             break;
         }
     }
 }
 
-bool isCarWithinBoundingBox(const vec3 &in carPos, const vec3 &in blockCornerPos) {
-    bool withinX = carPos.x >= blockCornerPos.x && carPos.x <= blockCornerPos.x + 32;
-    bool withinY = carPos.y >= blockCornerPos.y && carPos.y <= blockCornerPos.y + 32;
-    bool withinZ = carPos.z >= blockCornerPos.z && carPos.z <= blockCornerPos.z + 32;
 
-    bool withinBoundingBox = withinX && withinY && withinZ;
 
-//    log("isCarWithinBoundingBox: Car at " + carPos.ToString() + " is " + (withinBoundingBox ? "within" : "outside") + " the bounding box of block at " + blockCornerPos.ToString(), LogLevel::Info, 298);
-    return withinBoundingBox;
+bool isCarWithinBoundingBox(const array<vec3> &in carCorners, const vec3 &in blockCornerPos, float threshold = 0) {
+    for (uint i = 0; i < carCorners.Length; i++) {
+        bool withinX = carCorners[i].x >= (blockCornerPos.x - threshold) && carCorners[i].x <= (blockCornerPos.x + 32 + threshold);
+        bool withinY = carCorners[i].y >= blockCornerPos.y && carCorners[i].y <= blockCornerPos.y + 32;
+        bool withinZ = carCorners[i].z >= (blockCornerPos.z - threshold) && carCorners[i].z <= (blockCornerPos.z + 32 + threshold);
+
+        if (withinX && withinY && withinZ) {
+            return true;
+        }
+    }
+    return false;
 }
