@@ -8,11 +8,12 @@ class BlockInfo {
 class ReactorBlockInfo {
     vec3 coordinates;
     int blockIndex;
+    vec3 blockPos;
 
-    ReactorBlockInfo(const vec3 &in coords, int index, const vec3 &in blockPos) {
+    ReactorBlockInfo(const vec3 &in coords, int index, const vec3 &in pos) {
         coordinates = coords;
         blockIndex = index;
-        blockPos = blockPos;
+        blockPos = pos;
     }
 }
 
@@ -264,7 +265,7 @@ bool isReactorBlock(const string &in blockName, int index, const vec3 &in blockP
         waterDeep.Find(blockName) >= 0) {
 
         vec3 blockPos = CoordToPos(blockPosition);
-        reactorBlocks.InsertLast(ReactorBlockInfo(blockPos, index));
+        reactorBlocks.InsertLast(ReactorBlockInfo(blockPos, index, blockPosition));
         return true;
     }
     return false;
