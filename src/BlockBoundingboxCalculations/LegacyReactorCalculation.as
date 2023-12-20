@@ -62,7 +62,7 @@ bool reactorIsNotOldReactor() {
 }
 
 void resetReactorCountdown() {
-    if (newReactorLevel != 0) {
+    if (ReactorLevel != 0) {
         if (ReactorFinalCountdown == 0.01 or ReactorFinalCountdown == 0.05) {
             CountdownTime = 950;
         } else {
