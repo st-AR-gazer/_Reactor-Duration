@@ -117,7 +117,7 @@ void materialCalculations(CSceneVehicleVisState@ state) {
     auto RLMaterial = state.RLGroundContactMaterial;
 
     print(state.FRGroundContactMaterial + " " + state.FLGroundContactMaterial + " " + state.RRGroundContactMaterial + " " + state.RLGroundContactMaterial);
-    print("^^^^^¨"); 
+    print("^^^^^"); 
 
     if (FRMaterial != 4 && FRMaterial != 9 && FRMaterial != 80) {
         PreviousFRMaterial = FRMaterial;
@@ -131,6 +131,9 @@ void materialCalculations(CSceneVehicleVisState@ state) {
     if (RLMaterial != 4 && RLMaterial != 9 && RLMaterial != 80) {
         PreviousRLMaterial = RLMaterial;
     }
+
+    print(FRMaterial + " " + FLMaterial + " " + RRMaterial + " " + RLMaterial);
+
 }
 
 void reactorCalculations(CSceneVehicleVisState@ state) {
