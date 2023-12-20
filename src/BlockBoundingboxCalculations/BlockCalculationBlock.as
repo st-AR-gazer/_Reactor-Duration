@@ -224,7 +224,7 @@ void reactorBlockHitboxCalculationsBlock() {
     }
     
     auto blocksArray = map.Blocks;
-    log("reactorBlockHitboxCalculationsBlock: Processing " + blocksArray.Length + " blocks", LogLevel::Info, 226);
+    log("reactorBlockHitboxCalculationsBlock: Processing " + blocksArray.Length + " blocks", LogLevel::Info, 227);
 
     for (uint i = 0; i < blocksArray.Length; i++) {
         string blockName = blocksArray[i].BlockInfo.Name;
@@ -237,12 +237,12 @@ void reactorBlockHitboxCalculationsBlock() {
             reactorBlockWorldPositions.InsertLast(blockPos);
             reactorBlockIndices.InsertLast(i);
 
-            log("Added reactor block: " + blockName + " at position: " + blockPos.ToString(), LogLevel::InfoG, 239);
+            log("Added reactor block: " + blockName + " at position: " + blockPos.ToString(), LogLevel::InfoG, 240);
         }
     }
 
     hasCalculatedReactorBlocks = true;
-    log("reactorBlockHitboxCalculationsBlock: Completed", LogLevel::Info, 244);
+    log("reactorBlockHitboxCalculationsBlock: Completed", LogLevel::Info, 245);
 
 }
 
@@ -266,13 +266,13 @@ bool isReactorBlock(const string &in blockName) {
 
 shared vec3 CoordToPos(vec3 coord) {
     vec3 pos = vec3(coord.x * 32, (int(coord.y) - 8) * 8, coord.z * 32);
-    log("CoordToPos: Converted " + coord.ToString() + " to " + pos.ToString(), LogLevel::Info, 267);
+    log("CoordToPos: Converted " + coord.ToString() + " to " + pos.ToString(), LogLevel::Info, 269);
     return pos;
 }
 
 void cacheReactorBlocks() {
     // Implement caching logic if required
-    log("cacheReactorBlocks: Called", LogLevel::Info, 273);
+    log("cacheReactorBlocks: Called", LogLevel::Info, 275);
     // ...
 }
 
@@ -281,20 +281,20 @@ void checkCarPosition() {
 
     for (uint i = 0; i < reactorBlockWorldPositions.Length; i++) {
         if (isCarWithinBoundingBox(carPosition, reactorBlockWorldPositions[i])) {
-            log("checkCarPosition: Car is within bounding box of reactor block at position: " + reactorBlockWorldPositions[i].ToString(), LogLevel::Warn, 283);
+            log("checkCarPosition: Car is within bounding box of reactor block at position: " + reactorBlockWorldPositions[i].ToString(), LogLevel::Warn, 284);
             resetReactorCountdown();
             break;
         }
     }
 }
 
-bool isCarWithinBoundingBox(const vec3 &in carPos, const vec3 &in blockPos) {
-    float blockHalfSize = 16.0;
-    bool withinX = carPos.x >= blockPos.x - blockHalfSize && carPos.x <= blockPos.x + blockHalfSize;
-    bool withinY = carPos.y >= blockPos.y - blockHalfSize && carPos.y <= blockPos.y + blockHalfSize;
-    bool withinZ = carPos.z >= blockPos.z - blockHalfSize && carPos.z <= blockPos.z + blockHalfSize;
+bool isCarWithinBoundingBox(const vec3 &in carPos, const vec3 &in blockCornerPos) {
+    bool withinX = carPos.x >= blockCornerPos.x && carPos.x <= blockCornerPos.x + 32;
+    bool withinY = carPos.y >= blockCornerPos.y && carPos.y <= blockCornerPos.y + 32;
+    bool withinZ = carPos.z >= blockCornerPos.z && carPos.z <= blockCornerPos.z + 32;
 
     bool withinBoundingBox = withinX && withinY && withinZ;
-    log("isCarWithinBoundingBox: Car at " + carPos.ToString() + " is " + (withinBoundingBox ? "within" : "outside") + " the bounding box of block at " + blockPos.ToString(), LogLevel::Info, 298);
+
+    log("isCarWithinBoundingBox: Car at " + carPos.ToString() + " is " + (withinBoundingBox ? "within" : "outside") + " the bounding box of block at " + blockCornerPos.ToString(), LogLevel::Info, 298);
     return withinBoundingBox;
 }
