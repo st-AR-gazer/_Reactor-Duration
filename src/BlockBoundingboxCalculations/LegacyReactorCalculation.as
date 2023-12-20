@@ -24,7 +24,7 @@ void legacyReactorCalculations(CSceneVehicleVisState@ state) {
         // print(ReactorFinalCountdown);
 
         if ((isReactorActive(state)) or (isGroundContectMaterialConditionMet(state))/* or (reactorIsNotOldReactor())*/) {
-                resetReactorCountdown(state);
+                resetReactorCountdown();
         } else {
             CountdownTime -= 1;
         }
