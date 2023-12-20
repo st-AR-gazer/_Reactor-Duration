@@ -33,7 +33,7 @@ void legacyReactorCalculations(CSceneVehicleVisState@ state) {
         if ((isReactorActive(state)) or (isGroundContectMaterialConditionMet(state)) or (reactorIsNotOldReactor())) {
                 resetReactorCountdown();
         } else {
-            CountdownTime -= 1;
+            CountdownTime -= 2000;
         }
         
     } catch { }
