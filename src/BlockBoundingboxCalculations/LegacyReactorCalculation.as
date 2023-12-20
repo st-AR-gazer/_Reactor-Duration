@@ -28,6 +28,8 @@ void legacyReactorCalculations(CSceneVehicleVisState@ state) {
         ReactorFinalCountdown = Dev::GetOffsetFloat(state, 380);
         // print(ReactorFinalCountdown);
 
+        print("" + (isReactorActive()) + " " + (isGroundContectMaterialConditionMet()) + " " + (reactorIsNotOldReactor()));
+
         if ((isReactorActive()) or (isGroundContectMaterialConditionMet()) or (reactorIsNotOldReactor())) {
                 resetReactorCountdown();
         } else {
