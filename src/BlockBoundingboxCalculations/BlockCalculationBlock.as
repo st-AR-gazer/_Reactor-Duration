@@ -284,6 +284,7 @@ void checkCarPosition() {
         if (isCarWithinBoundingBox(carPosition, reactorBlockWorldPositions[i])) {
             log("checkCarPosition: Car is within bounding box of reactor block at position: " + reactorBlockWorldPositions[i].ToString(), LogLevel::Warn, 283);
             resetReactorCountdown();
+            break;
         }
     }
     log("checkCarPosition: End", LogLevel::Info, 288);
@@ -292,10 +293,10 @@ void checkCarPosition() {
 bool isCarWithinBoundingBox(const vec3 &in carPos, const vec3 &in blockPos) {
     float blockHalfSize = 16.0;
     bool withinX = carPos.x >= blockPos.x - blockHalfSize && carPos.x <= blockPos.x + blockHalfSize;
-    // bool withinY = carPos.y >= blockPos.y - blockHalfSize && carPos.y <= blockPos.y + blockHalfSize;
+    bool withinY = carPos.y >= blockPos.y - blockHalfSize && carPos.y <= blockPos.y + blockHalfSize;
     bool withinZ = carPos.z >= blockPos.z - blockHalfSize && carPos.z <= blockPos.z + blockHalfSize;
 
-    bool withinBoundingBox = withinX && /*withinY && */withinZ;
+    bool withinBoundingBox = withinX && withinY && withinZ;
     log("isCarWithinBoundingBox: Car at " + carPos.ToString() + " is " + (withinBoundingBox ? "within" : "outside") + " the bounding box of block at " + blockPos.ToString(), LogLevel::Info, 298);
     return withinBoundingBox;
 }
