@@ -65,7 +65,7 @@ void resetReactorCountdown() {
 
 //
 
-        CTrackMania@ app = cast<CTrackMania>(GetApp());
+    CTrackMania@ app = cast<CTrackMania>(GetApp());
     if (app is null) return;
     // 
 
@@ -82,23 +82,13 @@ void resetReactorCountdown() {
     if (port is null) return;
 
     CSceneVehicleVis@ vis;
-    auto player = cast<CSmPlayer@>(playground.GameTerminals[0].GUIPlayer);
-    if (player !is null) {
+    auto playera = cast<CSmPlayer@>(playground.GameTerminals[0].GUIPlayer);
+    if (playera !is null) {
         @vis = VehicleState::GetVis(scene, player);
     } else {
         @vis = VehicleState::GetSingularVis(scene);
     }
     if (vis is null) return;
-
-
-    CSceneVehicleVis@ vis;
-    auto player = cast<CSmPlayer@>(playground.GameTerminals[0].GUIPlayer);
-    if (player !is null) {
-        @vis = VehicleState::GetVis(scene, player);
-    } else {
-        @vis = VehicleState::GetSingularVis(scene);
-    }
-
 
 
 
