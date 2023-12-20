@@ -29,7 +29,7 @@ void legacyReactorCalculations(CSceneVehicleVisState@ state) {
         // print(ReactorFinalCountdown);
 
         if ((isReactorActive()) or (isGroundContectMaterialConditionMet()) or (reactorIsNotOldReactor())) {
-                resetReactorCountdown() 
+                resetReactorCountdown();
         } else {
             CountdownTime -= 1;
         }
@@ -38,7 +38,8 @@ void legacyReactorCalculations(CSceneVehicleVisState@ state) {
 }
 
 bool isReactorActive() {
-    if (ReactorLevel != 0 and ReactorType != 0) return true; 
+    if (ReactorLevel != 0 and ReactorType != 0) return true;
+    return false;
 }
 
 bool isGroundContectMaterialConditionMet() {
@@ -52,10 +53,12 @@ bool isGroundContectMaterialConditionMet() {
          worldPossY < (oldWorldPossY + 32) && worldPossY > (oldWorldPossY - 32) &&
          worldPossZ < (oldWorldPossZ + 32) && worldPossZ > (oldWorldPossZ - 32))
     ) return true;
+    return false;
 } 
 
 bool reactorIsNotOldReactor() {
     if ((newReactorType != PreviousReactorType) or (newReactorLevel != PreviousReactorLevel)) return true;
+    return false;
 }
 
 void resetReactorCountdown() {

@@ -116,10 +116,8 @@ float GetVignetteIntensity()
 
 float get_Normalized_Vignette_Opacity()
 {
-    return Vignette_Opacity / 100.0;
-
     if (Vignette_Opacity > 100.0) {
-        Vignette_Opacity = 100.0;
+        return Vignette_Opacity = 100.0;
     }
     return Vignette_Opacity / 100.0;
 }

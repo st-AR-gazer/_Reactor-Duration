@@ -16,7 +16,7 @@ class ReactorBlockInfo {
 }
 
 array<BlockInfo> reactorBlocks;
-array<ReactorBlockInfo> blocks;
+//array<AllCurrentReactorBlocks> blocks;
 
 // #region All reactor granting BLOCKS (wood is not implemented yet xdd), (Items (gates) are not included)
 
