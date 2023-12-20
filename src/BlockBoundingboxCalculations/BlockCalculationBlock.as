@@ -283,7 +283,6 @@ void checkCarPosition() {
         if (isCarWithinBoundingBox(carPosition, reactorBlockWorldPositions[i])) {
             log("checkCarPosition: Car is within bounding box of reactor block at position: " + reactorBlockWorldPositions[i].ToString(), LogLevel::Warn, 283);
             resetReactorCountdown();
-            break;
         }
     }
     log("checkCarPosition: End", LogLevel::Info, 288);
