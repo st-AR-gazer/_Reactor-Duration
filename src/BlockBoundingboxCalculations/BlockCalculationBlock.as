@@ -295,6 +295,6 @@ bool isCarWithinBoundingBox(const vec3 &in carPos, const vec3 &in blockCornerPos
 
     bool withinBoundingBox = withinX && withinY && withinZ;
 
-    log("isCarWithinBoundingBox: Car at " + carPos.ToString() + " is " + (withinBoundingBox ? "within" : "outside") + " the bounding box of block at " + blockCornerPos.ToString(), LogLevel::Info, 298);
+//    log("isCarWithinBoundingBox: Car at " + carPos.ToString() + " is " + (withinBoundingBox ? "within" : "outside") + " the bounding box of block at " + blockCornerPos.ToString(), LogLevel::Info, 298);
     return withinBoundingBox;
 }
