@@ -82,9 +82,9 @@ void resetReactorCountdown() {
     if (port is null) return;
 
     CSceneVehicleVis@ vis;
-    auto playera = cast<CSmPlayer@>(playground.GameTerminals[0].GUIPlayer);
-    if (playera !is null) {
-        @vis = VehicleState::GetVis(scene);
+    auto player = cast<CSmPlayer@>(playground.GameTerminals[0].GUIPlayer);
+    if (player !is null) {
+        @vis = VehicleState::GetVis(scene, player);
     } else {
         @vis = VehicleState::GetSingularVis(scene);
     }
