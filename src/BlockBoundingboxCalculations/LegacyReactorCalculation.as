@@ -13,18 +13,11 @@ float FLDamperLen;
 float RRDamperLen;
 float RLDamperLen;
 
-auto FRMaterial;
-auto RLMaterial;
-auto FLMaterial;
-auto RRMaterial;
-
 uint newReactorLevel;
 uint newReactorType;
 
 void legacyReactorCalculations(CSceneVehicleVisState@ state) {
-    print(FRMaterial + " " + FLMaterial + " " + RRMaterial + " " + RLMaterial + "bbbbbbbbbbbbbb");
     materialCalculations(state);
-    print(FRMaterial + " " + FLMaterial + " " + RRMaterial + " " + RLMaterial + "aaaaa");
     reactorCalculations(state);
     try {
         ReactorFinalCountdown = Dev::GetOffsetFloat(state, 380);
@@ -34,7 +27,6 @@ void legacyReactorCalculations(CSceneVehicleVisState@ state) {
         if (isGroundContectMaterialConditionMet()) { print("Ground contact material condition is met"); } else { print("Ground contact material condition is not met"); };
         if (reactorIsNotOldReactor()) { print("reactor is not old reactor"); } else { print("reactor is old reactor"); };
         print(newReactorLevel + " " + newReactorType);
-        print(FRMaterial + " " + FLMaterial + " " + RRMaterial + " " + RLMaterial);
         print(newReactorType + " " + PreviousReactorType + " a " + newReactorLevel + " " + PreviousReactorLevel);
 
 
@@ -52,7 +44,14 @@ bool isReactorActive() {
     return false;
 }
 
-bool isGroundContectMaterialConditionMet() {
+bool isGroundContectMaterialConditionMet(CSceneVehicleVisState@ state) {
+    auto FRMaterial = state.FLGroundContactMaterial;
+    auto FLMaterial = state.FRGroundContactMaterial;
+    auto RRMaterial = state.RRGroundContactMaterial;
+    auto RLMaterial = state.RLGroundContactMaterial;
+        print(FRMaterial + " " + FLMaterial + " " + RRMaterial + " " + RLMaterial + "aaaaaa");
+
+
     if (FRMaterial == 0 or FLMaterial == 0 or RRMaterial == 0 or RLMaterial == 0) return true;
     
     if (((FRMaterial == 4 or FLMaterial == 4 or RRMaterial == 4 or RLMaterial == 4) or (FRMaterial == 9 or FLMaterial == 9 or RRMaterial == 9 or RLMaterial == 9)) 
@@ -117,9 +116,6 @@ void materialCalculations(CSceneVehicleVisState@ state) {
     auto FLMaterial = state.FRGroundContactMaterial;
     auto RRMaterial = state.RRGroundContactMaterial;
     auto RLMaterial = state.RLGroundContactMaterial;
-
-    print(state.FRGroundContactMaterial + " " + state.FLGroundContactMaterial + " " + state.RRGroundContactMaterial + " " + state.RLGroundContactMaterial);
-    print("^^^^^"); 
 
     if (FRMaterial != 4 && FRMaterial != 9 && FRMaterial != 80) {
         PreviousFRMaterial = FRMaterial;
