@@ -274,6 +274,6 @@ void checkCarPosition() {
 }
 
 bool isNear(const vec3 &in pos1, const vec3 &in pos2) {
-    float threshold = 0;
+    float threshold = 32;
     return (pos1 - pos2).Length() <= threshold;
 }
