@@ -244,7 +244,7 @@ void reactorBlockHitboxCalculationsBlock() {
 }
 
 bool isReactorBlock(const string &in blockName) {
-    return roadFlat.Find(blockName) >= 0 || roadSlopeUp.Find(blockName) >= 0 || 
+    return /*roadFlat.Find(blockName) >= 0 || roadSlopeUp.Find(blockName) >= 0 || 
            roadSlopeDown.Find(blockName) >= 0 || roadTiltLeft.Find(blockName) >= 0 || 
            roadTiltRight.Find(blockName) >= 0 || roadDiagLeft.Find(blockName) >= 0 || 
            roadDiagRight.Find(blockName) >= 0 || bankedDirt.Find(blockName) >= 0 || 
@@ -258,7 +258,7 @@ bool isReactorBlock(const string &in blockName) {
            platformFlat.Find(blockName) >= 0 || platformSlopeUp.Find(blockName) >= 0 || 
            platformSlopeDown.Find(blockName) >= 0 || platformTiltRight.Find(blockName) >= 0 || 
            platformTiltLeft.Find(blockName) >= 0 || waterShallow.Find(blockName) >= 0 || 
-           waterDeep.Find(blockName) >= 0;/*grasFlatTest.Find(blockName) >= 0;*/
+           waterDeep.Find(blockName) >= 0;*/grasFlatTest.Find(blockName) >= 0;
 }
 
 shared vec3 CoordToPos(vec3 coord) {
@@ -278,8 +278,8 @@ void checkCarPosition() {
     vec3 carPosition = vec3(carPositionX, carPositionY, carPositionZ);
 
     for (uint i = 0; i < reactorBlockWorldPositions.Length; i++) {
-        if (isNear(carPosition, reactorBlockWorldPositions[i])) {
-            log("checkCarPosition: Car is near reactor block at position: " + reactorBlockWorldPositions[i].ToString(), LogLevel::Warn, 283);
+        if (isCarWithinBoundingBox(carPosition, reactorBlockWorldPositions[i])) {
+            log("checkCarPosition: Car is within bounding box of reactor block at position: " + reactorBlockWorldPositions[i].ToString(), LogLevel::Warn, 283);
             resetReactorCountdown();
             break;
         }
@@ -287,9 +287,13 @@ void checkCarPosition() {
     log("checkCarPosition: End", LogLevel::Info, 288);
 }
 
-bool isNear(const vec3 &in pos1, const vec3 &in pos2) {
-    float threshold = 32;
-    bool near = (pos1 - pos2).Length() <= threshold;
-    log("isNear: Positions " + pos1.ToString() + " and " + pos2.ToString() + " are " + (near ? "near" : "not near"), LogLevel::Info, 294);
-    return near;
+bool isCarWithinBoundingBox(const vec3 &in carPos, const vec3 &in blockPos) {
+    float blockHalfSize = 16.0;
+    bool withinX = carPos.x >= blockPos.x - blockHalfSize && carPos.x <= blockPos.x + blockHalfSize;
+    // bool withinY = carPos.y >= blockPos.y - blockHalfSize && carPos.y <= blockPos.y + blockHalfSize;
+    bool withinZ = carPos.z >= blockPos.z - blockHalfSize && carPos.z <= blockPos.z + blockHalfSize;
+
+    bool withinBoundingBox = withinX && /*withinY && */withinZ;
+    log("isCarWithinBoundingBox: Car at " + carPos.ToString() + " is " + (withinBoundingBox ? "within" : "outside") + " the bounding box of block at " + blockPos.ToString(), LogLevel::Info, 298);
+    return withinBoundingBox;
 }
