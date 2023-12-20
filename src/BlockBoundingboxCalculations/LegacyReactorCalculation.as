@@ -22,9 +22,9 @@ uint newReactorLevel;
 uint newReactorType;
 
 void legacyReactorCalculations(CSceneVehicleVisState@ state) {
+    materialCalculations(state);
+    reactorCalculations(state);
     try {
-        materialCalculations(state);
-        reactorCalculations(state);
         ReactorFinalCountdown = Dev::GetOffsetFloat(state, 380);
         // print(ReactorFinalCountdown);
 
@@ -33,7 +33,7 @@ void legacyReactorCalculations(CSceneVehicleVisState@ state) {
         if (reactorIsNotOldReactor()) { print("reactor is not old reactor"); } else { print("reactor is old reactor"); };
         print(newReactorLevel + " " + newReactorType);
         print(FRMaterial + " " + FLMaterial + " " + RRMaterial + " " + RLMaterial);
-        print(newReactorType != PreviousReactorType + " " + newReactorLevel != PreviousReactorLevel)
+        print(newReactorType != PreviousReactorType + " " + newReactorLevel != PreviousReactorLevel);
 
 
         if ((isReactorActive()) or (isGroundContectMaterialConditionMet()) or (reactorIsNotOldReactor())) {
