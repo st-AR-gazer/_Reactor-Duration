@@ -276,13 +276,13 @@ void cacheReactorBlocks() {
     // ...
 }
 
-void checkCarPosition() {
+void checkCarPosition(CSceneVehicleVisState@ state) {
     vec3 carPosition = vec3(carPositionX, carPositionY, carPositionZ);
 
     for (uint i = 0; i < reactorBlockWorldPositions.Length; i++) {
         if (isCarWithinBoundingBox(carPosition, reactorBlockWorldPositions[i])) {
             log("checkCarPosition: Car is within bounding box of reactor block at position: " + reactorBlockWorldPositions[i].ToString(), LogLevel::Warn, 284);
-            resetReactorCountdown();
+            resetReactorCountdown(state);
             break;
         }
     }
