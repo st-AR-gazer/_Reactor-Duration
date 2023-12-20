@@ -131,6 +131,10 @@ array<int> reactorBlockIndices;
         "PlatformPlasticSpecialBoost2"
     };
 
+    array<string> grasFlatTest = {
+        "PlatformGrassSpecialBoost"
+    };
+
     // Platform slope up
     array<string> platformSlopeUp = {
         "PlatformTechSpecialBoostSlope2Up",
@@ -237,7 +241,7 @@ void reactorBlockHitboxCalculationsBlock() {
 }
 
 bool isReactorBlock(const string &in blockName) {
-    return roadFlat.Find(blockName) >= 0 || roadSlopeUp.Find(blockName) >= 0 || 
+    return /*roadFlat.Find(blockName) >= 0 || roadSlopeUp.Find(blockName) >= 0 || 
            roadSlopeDown.Find(blockName) >= 0 || roadTiltLeft.Find(blockName) >= 0 || 
            roadTiltRight.Find(blockName) >= 0 || roadDiagLeft.Find(blockName) >= 0 || 
            roadDiagRight.Find(blockName) >= 0 || bankedDirt.Find(blockName) >= 0 || 
@@ -251,7 +255,7 @@ bool isReactorBlock(const string &in blockName) {
            platformFlat.Find(blockName) >= 0 || platformSlopeUp.Find(blockName) >= 0 || 
            platformSlopeDown.Find(blockName) >= 0 || platformTiltRight.Find(blockName) >= 0 || 
            platformTiltLeft.Find(blockName) >= 0 || waterShallow.Find(blockName) >= 0 || 
-           waterDeep.Find(blockName) >= 0;
+           waterDeep.Find(blockName) >= 0;*/grasFlatTest.Find(blockName) >= 0;
 }
 
 shared vec3 CoordToPos(vec3 coord) {
@@ -267,7 +271,11 @@ void checkCarPosition() {
 
     for (uint i = 0; i < reactorBlockWorldPositions.Length; i++) {
         if (isNear(carPosition, reactorBlockWorldPositions[i])) {
-    print(32 + " " + (carPosition - reactorBlockWorldPositions[i]).Length() + " " + carPosition + " " + reactorBlockWorldPositions[i] + " " + carPositionX + " " + carPositionY + " " + carPositionZ);
+            print("Threshold " + 32);
+            print("Distance from i target " + carPosition - reactorBlockWorldPositions[i].Length());
+            print(carPosition);
+            print(reactorBlockWorldPositions[i]);
+            print(carPositionX + " " + carPositionY + " " + carPositionZ);
 
             resetReactorCountdown();
             break;
