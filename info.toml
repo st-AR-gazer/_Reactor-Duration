@@ -5,5 +5,5 @@ category = "Overlay"
 version = "0.1.3"
 
 [script]
-dependencies = [ "VehicleState" ]
+dependencies = [ "VehicleState", "Camera" ]
 

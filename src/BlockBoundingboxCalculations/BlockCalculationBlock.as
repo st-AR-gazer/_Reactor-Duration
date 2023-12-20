@@ -281,7 +281,13 @@ void checkCarPosition() {
     vec3 carOrientation = vec3(carOrientation.x, carOrientation.y, carOrientation.z);
 
     array<vec3> carCorners = calculateCarBoundingBox(carPosition, carOrientation);
-    print(carCorners);
+
+    // Assuming you call this from a rendering context
+    for (uint i = 0; i < carCorners.Length; i++) {
+        renderDot(carCorners[i]); // Call renderDot for each corner
+    }
+
+    print(carCorners[0].ToString() + " " + carCorners[1].ToString() + " " + carCorners[2].ToString() + " " + carCorners[3].ToString());
 
     for (uint i = 0; i < reactorBlockWorldPositions.Length; i++) {
         if (isCarWithinBoundingBox(carCorners, reactorBlockWorldPositions[i])) {
@@ -294,6 +300,22 @@ void checkCarPosition() {
     }
 }
 
+float dotSize = 2;
+
+// Adjusted renderDot function to take a vec3 position as input
+void renderDot(const vec3 &in pos3D) {
+    vec3 pos = Camera::ToScreen(pos3D);
+    if (pos.z >= 0) return; // Do not draw if the point is behind the camera
+
+    float size;
+    float distance = Math::Sqrt(-pos.z / 32);
+    size = (2 * dotSize * (distance + 3)) / (distance);
+
+    nvg::BeginPath();
+    nvg::Circle(pos.xy, size);
+    nvg::FillColor(vec4(1.f, 0.f, 0.f, 0.9f));
+    nvg::Fill();
+}
 
 
 bool isCarWithinBoundingBox(const array<vec3> &in carCorners, const vec3 &in blockCornerPos, float threshold = 0) {
