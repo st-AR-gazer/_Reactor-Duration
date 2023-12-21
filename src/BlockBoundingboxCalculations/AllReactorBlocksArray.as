@@ -120,10 +120,6 @@ array<string> platformFlat = {
     "PlatformPlasticSpecialBoost2"
 };
 
-array<string> grasFlatTest = {
-    "PlatformGrassSpecialBoost"
-};
-
 // Platform slope up
 array<string> platformSlopeUp = {
     "PlatformTechSpecialBoostSlope2Up",

@@ -12,7 +12,7 @@ float RLDamperLen;
 
 void legacyReactorCalculations(CSceneVehicleVisState@ state) {
     materialCalculations(state);
-    reactorCalculations(state);
+    reactorFinalCountdownCalculations(state);
     try {
         ReactorFinalCountdown = Dev::GetOffsetFloat(state, 380);
         // print(ReactorFinalCountdown);
@@ -28,11 +28,6 @@ void legacyReactorCalculations(CSceneVehicleVisState@ state) {
 
 bool reactorOffToOnCheck() {
     if (ReactorLevel != PreviousReactorLevel && ReactorLevel != 0) return true;
-    return false;
-}
-
-bool isReactorActive() {
-    if (ReactorLevel != 0) return true;
     return false;
 }
 
@@ -60,19 +55,6 @@ bool reactorIsNotOldReactor() {
     return false;
 }
 
-void resetReactorCountdown() {
-    if (isReactorActive()) {
-        if (ReactorFinalCountdown == 0.01 or ReactorFinalCountdown == 0.05) {
-            CountdownTime = 950;
-        } else {
-            CountdownTime = 6000;
-        }
-    } else {
-        CountdownTime = 0;
-    }
-    absoluteStartTime = Time::get_Now();
-}
-
 void materialCalculations(CSceneVehicleVisState@ state) {
     auto FRMaterial = state.FLGroundContactMaterial;
     auto FLMaterial = state.FRGroundContactMaterial;
@@ -93,7 +75,7 @@ void materialCalculations(CSceneVehicleVisState@ state) {
     }
 }
 
-void reactorCalculations() {
+void reactorFinalCountdownCalculations() {
     if (ReactorFinalCountdown == 0 && ReactorLevel != 0 && CountdownTime <= 1030 && CountdownTime >= 980) {
         CountdownTime = 1029;
     }
