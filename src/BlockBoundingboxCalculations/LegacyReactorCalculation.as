@@ -12,7 +12,7 @@ float RLDamperLen;
 
 void legacyReactorCalculations(CSceneVehicleVisState@ state) {
     materialCalculations(state);
-    reactorFinalCountdownCalculations(state);
+    reactorFinalCountdownCalculations();
     try {
         ReactorFinalCountdown = Dev::GetOffsetFloat(state, 380);
         // print(ReactorFinalCountdown);
