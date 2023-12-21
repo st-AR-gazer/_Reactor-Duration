@@ -227,7 +227,7 @@ void reactorBlockHitboxCalculationsBlock() {
     }
     
     auto blocksArray = map.Blocks;
-    log("reactorBlockHitboxCalculationsBlock: Processing " + blocksArray.Length + " blocks", LogLevel::Info, 227);
+    log("reactorBlockHitboxCalculationsBlock: Processing " + blocksArray.Length + " blocks", LogLevel::Info, 230);
 
     for (uint i = 0; i < blocksArray.Length; i++) {
         string blockName = blocksArray[i].BlockInfo.Name;
@@ -240,12 +240,12 @@ void reactorBlockHitboxCalculationsBlock() {
             reactorBlockWorldPositions.InsertLast(blockPos);
             reactorBlockIndices.InsertLast(i);
 
-            log("Added reactor block: " + blockName + " at position: " + blockPos.ToString(), LogLevel::InfoG, 240);
+            log("Added reactor block: " + blockName + " at position: " + blockPos.ToString(), LogLevel::InfoG, 243);
         }
     }
 
     hasCalculatedReactorBlocks = true;
-    log("reactorBlockHitboxCalculationsBlock: Completed", LogLevel::Info, 245);
+    log("reactorBlockHitboxCalculationsBlock: Completed", LogLevel::Info, 248);
 
 }
 
@@ -269,13 +269,13 @@ bool isReactorBlock(const string &in blockName) {
 
 shared vec3 CoordToPos(vec3 coord) {
     vec3 pos = vec3(coord.x * 32, (int(coord.y) - 8) * 8, coord.z * 32);
-    log("CoordToPos: Converted " + coord.ToString() + " to " + pos.ToString(), LogLevel::Info, 269);
+    log("CoordToPos: Converted " + coord.ToString() + " to " + pos.ToString(), LogLevel::Info, 272);
     return pos;
 }
 
 void cacheReactorBlocks() {
     // Implement caching logic if required
-    log("cacheReactorBlocks: Called", LogLevel::Info, 275);
+    log("cacheReactorBlocks: Called", LogLevel::Info, 278);
     // ...
 }
 
