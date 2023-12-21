@@ -211,6 +211,9 @@ void reactorBlockHitboxCalculationsBlock() {
         return;
     }
 
+    auto playground = cast<CSmArenaClient>(app.CurrentPlayground);
+    if (playground is null || playground.Arena.Players.Length == 0) return; // hasCalculatedReactorBlocks is set in Main.as out ofnesesity
+
     auto map = cast<CGameCtnChallenge@>(app.RootMap);
     if (app.RootMap is null) {
         hasCalculatedReactorBlocks = false;
@@ -282,12 +285,11 @@ void checkCarPosition() {
 
     array<vec3> carCorners = calculateCarBoundingBox(carPosition, carOrientation);
 
-    // Assuming you call this from a rendering context
+    /* Dot Rendering Yoinked from ArEyeses */
     for (uint i = 0; i < carCorners.Length; i++) {
-        renderDot(carCorners[i]); // Call renderDot for each corner
+        renderDot(carCorners[i]);
     }
 
-    print(carCorners[0].ToString() + " " + carCorners[1].ToString() + " " + carCorners[2].ToString() + " " + carCorners[3].ToString());
 
     for (uint i = 0; i < reactorBlockWorldPositions.Length; i++) {
         if (isCarWithinBoundingBox(carCorners, reactorBlockWorldPositions[i])) {
@@ -300,12 +302,15 @@ void checkCarPosition() {
     }
 }
 
+/* Dot Rendering Yoinked from ArEyeses */
 float dotSize = 2;
 
-// Adjusted renderDot function to take a vec3 position as input
+bool renderDots = false;
+
 void renderDot(const vec3 &in pos3D) {
+    if (!renderDots) return; 
     vec3 pos = Camera::ToScreen(pos3D);
-    if (pos.z >= 0) return; // Do not draw if the point is behind the camera
+    if (pos.z >= 0) return;
 
     float size;
     float distance = Math::Sqrt(-pos.z / 32);

@@ -70,6 +70,7 @@ void resetReactorCountdown() {
     } else {
         CountdownTime = 0;
     }
+    absoluteStartTime = Time::get_Now();
 }
 
 void materialCalculations(CSceneVehicleVisState@ state) {

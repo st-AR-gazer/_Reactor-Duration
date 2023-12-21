@@ -4,7 +4,11 @@ void Update(float dt) {
     // 
 
     auto playground = cast<CSmArenaClient>(app.CurrentPlayground);
-    if (playground is null || playground.Arena.Players.Length == 0) return;
+    if (playground is null || playground.Arena.Players.Length == 0) {
+        hasCalculatedReactorBlocks = false;
+        return;
+    }
+    
 
     auto script = cast<CSmScriptPlayer>(playground.Arena.Players[0].ScriptAPI);
     if (script is null) return; 

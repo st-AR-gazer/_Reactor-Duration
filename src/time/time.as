@@ -1,20 +1,27 @@
-int absoluteStartTime = -1;
+int absoluteStartTime = -1; // reset happens in legacy countdown code
+auto PreviousCountdownTime;
 
 int absolute(int value) {
     return value < 0 ? -value : value;
 }
 
 void time(float dt, CInputPort@ port) {
-    uint CurrentTime = Time::get_Now();
-    if (port.CurrentActionMap == "MenuInputsMap") {
-        PreviousTime = CurrentTime;
-        return;
-    }
-    
-    if (0 >= CountdownTime) {
+    print(CountdownTime);
+
+    if (ReactorLevel == 0) {
         CountdownTime = 0;
     }
 
+    if (10 >= CountdownTime) {
+        CountdownTime = 10;
+    }
+
+    if (port.CurrentActionMap == "MenuInputsMap") {
+        CountdownTime = PreviousCountdownTime;
+        
+        return;
+    }
+    
     if (CountdownTime == 6000 && absoluteStartTime == -1) {
         absoluteStartTime = Time::get_Now();
     }
@@ -32,41 +39,5 @@ void time(float dt, CInputPort@ port) {
         }
     }
 
-    PreviousTime = CurrentTime;
-
+    PreviousCountdownTime = CountdownTime;
 }
-
-// void time( port) {
-//     checkReactorDrop();
-
-    
-
-    
-
-//     if (CountdownTime > 0) {
-//         CountdownTime -= CurrentTime - PreviousTime;
-//         if (CountdownTime < 0) CountdownTime = 0;
-//     }
-
-// }
-
-
-// float previousReactorFinalCountdown = ReactorFinalCountdown;
-
-// void checkReactorDrop() {
-//     float drop = previousReactorFinalCountdown - ReactorFinalCountdown;
-
-//     if (ReactorFinalCountdown == 0) {
-//         if (previousReactorFinalCountdown > 0.91 && previousReactorFinalCountdown < 0.96) {
-//             drop = previousReactorFinalCountdown;
-//         } else {
-//             drop = 0;
-//         }
-//     }
-
-//     if ((drop > 0.08) && (ReactorLevel == 1 or ReactorLevel == 2)) {
-//         CountdownTime = 6000;
-//     }
-
-//     previousReactorFinalCountdown = ReactorFinalCountdown;
-// }
