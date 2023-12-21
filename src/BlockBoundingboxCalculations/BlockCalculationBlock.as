@@ -108,7 +108,7 @@ void cacheReactorBlocks() {
 }
 
 bool isRingReactorBlock(const string &in blockName) {
-    return reactorEffectRing.Find(blockName) >= 0;
+    return reactorEffectRing.Find(blockName) >= 0 || reactorEffectRectangle.Find(blockName) >= 0;
 }
 
 int getBlockRotation(CGameCtnBlock@ block) {

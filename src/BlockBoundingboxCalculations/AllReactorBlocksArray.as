@@ -182,12 +182,12 @@
     // Water shallow
     array<string> waterShallow = {
         "RoadWaterSpecialBoost",
-        "TrackWallWaterSpecialBoost"
+        "RoadWaterSpecialBoost2"
     };
 
     // Water Deep
     array<string> waterDeep = {
-        "RoadWaterSpecialBoost2",
+        "TrackWallWaterSpecialBoost",
         "TrackWallWaterSpecialBoost2"
     };
 
@@ -204,10 +204,13 @@
     };
 
     array<string> reactorEffectRing = {
-        "",
-        "",
-        "",
-        ""
+        "GateSpecialBoost",
+        "GateSpecialBoost2"
+    };
+
+    array<string> reactorEffectRectangle = {
+        "GateExpandableSpecialBoost",
+        "GateExpandableSpecialBoost2"
     };
 
 // #endregion
