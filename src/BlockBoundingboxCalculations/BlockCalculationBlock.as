@@ -20,7 +20,7 @@ void reactorBlockHitboxCalculationsBlock() {
     }
 
     auto playground = cast<CSmArenaClient>(app.CurrentPlayground);
-    if (playground is null || playground.Arena.Players.Length == 0) return; // hasCalculatedReactorBlocks is set in Main.as out ofnesesity
+    if (playground is null || playground.Arena.Players.Length == 0) return; // hasCalculatedReactorBlocks is set in Main.as out of nesesity
 
     auto map = cast<CGameCtnChallenge@>(app.RootMap);
     if (app.RootMap is null) {
@@ -35,38 +35,45 @@ void reactorBlockHitboxCalculationsBlock() {
     }
     
     auto blocksArray = map.Blocks;
-    log("reactorBlockHitboxCalculationsBlock: Processing " + blocksArray.Length + " blocks", LogLevel::Info, 230);
+    log("reactorBlockHitboxCalculationsBlock: Processing " + blocksArray.Length + " blocks", LogLevel::Info, 38);
 
+    // Full blocks
+    for (uint i = 0; i < blocksArray.Length; i++) {
+        string blockName = blocksArray[i].BlockInfo.Name;
+        vec3 blockCoord = vec3(blocksArray[i].CoordX, blocksArray[i].CoordY, blocksArray[i].CoordZ);
+        vec3 blockPos = CoordToPos(blockCoord);
+
+        if (isReactorBlock(blockName)) {
+            reactorBlockNames.InsertLast(blockName);
+            reactorBlockGridPositions.InsertLast(blockCoord);
+            reactorBlockWorldPositions.InsertLast(blockPos);
+            reactorBlockIndices.InsertLast(i);
+
+            log("Added reactor block: " + blockName + " at position: " + blockPos.ToString(), LogLevel::InfoG, 53);
+        }
+    }
+    // Ring blocks
     for (uint i = 0; i < blocksArray.Length; i++) {
         string blockName = blocksArray[i].BlockInfo.Name;
         vec3 blockCoord = vec3(blocksArray[i].CoordX, blocksArray[i].CoordY, blocksArray[i].CoordZ);
         vec3 blockPos = CoordToPos(blockCoord);
         int blockRotation = getBlockRotation(blocksArray[i]);
 
-        if (isReactorBlock(blockName)) {
-            // Handle regular reactor blocks
-            reactorBlockNames.InsertLast(blockName);
-            reactorBlockGridPositions.InsertLast(blockCoord);
-            reactorBlockWorldPositions.InsertLast(blockPos);
-            reactorBlockIndices.InsertLast(i);
-
-            log("Added reactor block: " + blockName + " at position: " + blockPos.ToString(), LogLevel::InfoG, 243);
-        }
         if (isRingReactorBlock(blockName)) {
-            // Handle ring reactor blocks
             ringReactorBlockNames.InsertLast(blockName);
             ringReactorBlockGridPositions.InsertLast(blockCoord);
             ringReactorBlockWorldPositions.InsertLast(blockPos);
             ringReactorBlockIndices.InsertLast(i);
             ringReactorBlockRotations.InsertLast(blockRotation);
 
-            log("Added ring reactor block: " + blockName + " at position: " + blockPos.ToString() + " with rotation: " + blockRotation, LogLevel::InfoG, 243);
-        }
+            renderRingReactorDots(blockPos, blockRotation);
 
+            log("Added ring reactor block: " + blockName + " at position: " + blockPos.ToString() + " with rotation: " + blockRotation, LogLevel::InfoG, 63);
+        }
     }
 
     hasCalculatedReactorBlocks = true;
-    log("reactorBlockHitboxCalculationsBlock: Completed", LogLevel::Info, 248);
+    log("reactorBlockHitboxCalculationsBlock: Completed", LogLevel::Info, 69);
 
 }
 
@@ -90,13 +97,13 @@ bool isReactorBlock(const string &in blockName) {
 
 shared vec3 CoordToPos(vec3 coord) {
     vec3 pos = vec3(coord.x * 32, (int(coord.y) - 8) * 8, coord.z * 32);
-    log("CoordToPos: Converted " + coord.ToString() + " to " + pos.ToString(), LogLevel::Info, 272);
+    log("CoordToPos: Converted " + coord.ToString() + " to " + pos.ToString(), LogLevel::Info, 93);
     return pos;
 }
 
 void cacheReactorBlocks() {
     // Implement caching logic if required
-    log("cacheReactorBlocks: Called", LogLevel::Info, 278);
+    log("cacheReactorBlocks: Called", LogLevel::Info, 99);
     // ...
 }
 
@@ -130,7 +137,6 @@ void checkCarPosition() {
     for (uint i = 0; i < ringReactorBlockWorldPositions.Length; i++) {
         if (isCarWithinRingReactorBoundingBox(carCorners, ringReactorBlockWorldPositions[i], ringReactorBlockIndices[i])) {
             resetReactorCountdown();
-            // Additional logic for ring reactor blocks if needed
         }
     }
 
@@ -168,8 +174,60 @@ void checkCarPosition() {
 //
 
 bool isCarWithinRingReactorBoundingBox(const array<vec3> &in carCorners, const vec3 &in blockCenterPos, int blockRotation) {
-    
+    float radius = 15.0;
+    float width = 2.0;
+
+    float minPlaneBound, maxPlaneBound;
+    if (blockRotation == 0 || blockRotation == 180) {
+        minPlaneBound = blockCenterPos.x - width / 2.0;
+        maxPlaneBound = blockCenterPos.x + width / 2.0;
+    } else {
+        minPlaneBound = blockCenterPos.z - width / 2.0;
+        maxPlaneBound = blockCenterPos.z + width / 2.0;
+    }
+
+    for (uint i = 0; i < carCorners.Length; i++) {
+        float distanceToCenter;
+        if (blockRotation == 0 || blockRotation == 180) {
+            distanceToCenter = Math::Abs(carCorners[i].z - blockCenterPos.z);
+        } else {
+            distanceToCenter = Math::Abs(carCorners[i].x - blockCenterPos.x);
+        }
+
+        bool withinCircle = distanceToCenter <= radius;
+        bool withinPlaneBounds = (blockRotation == 0 || blockRotation == 180) ? (carCorners[i].x >= minPlaneBound && carCorners[i].x <= maxPlaneBound) : (carCorners[i].z >= minPlaneBound && carCorners[i].z <= maxPlaneBound);
+
+        if (withinCircle && withinPlaneBounds) {
+            return true;
+        }
+    }
+
+    return false;
 }
+
+void renderRingReactorDots(const vec3 &in blockCenterPos, int blockRotation) {
+    float radius = 15.0;
+    int numDots = 50;
+
+    for (int i = 0; i < numDots; i++) {
+        float angle = (360.0 / numDots) * i;
+        float radianAngle = angle * Math::PI / 180.0;
+        vec3 dotPos;
+
+        if (blockRotation == 0 || blockRotation == 180) {
+            dotPos.x = blockCenterPos.x;
+            dotPos.y = blockCenterPos.y + radius * Math::Cos(radianAngle);
+            dotPos.z = blockCenterPos.z + radius * Math::Sin(radianAngle);
+        } else {
+            dotPos.x = blockCenterPos.x + radius * Math::Sin(radianAngle);
+            dotPos.y = blockCenterPos.y + radius * Math::Cos(radianAngle);
+            dotPos.z = blockCenterPos.z;
+        }
+
+        renderDot(dotPos);
+    }
+}
+
 
 bool isCarWithinBoundingBox(const array<vec3> &in carCorners, const vec3 &in blockCornerPos, float threshold = 0) {
     for (uint i = 0; i < carCorners.Length; i++) {
