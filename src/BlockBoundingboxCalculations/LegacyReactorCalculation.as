@@ -17,7 +17,7 @@ void legacyReactorCalculations(CSceneVehicleVisState@ state) {
         ReactorFinalCountdown = Dev::GetOffsetFloat(state, 380);
         // print(ReactorFinalCountdown);
 
-        if ((reactorOffToOnCheck()) or (isGroundContectMaterialConditionMet(state))/* or (reactorIsNotOldReactor())*/) {
+        if ((reactorOffToOnCheck()) or (isGroundContectMaterialConditionMet(state)) or (reactorIsNotOldReactor())) {
                 resetReactorCountdown();
         } else {
             CountdownTime -= 1;
@@ -55,10 +55,10 @@ bool isGroundContectMaterialConditionMet(CSceneVehicleVisState@ state) {
     return false;
 } 
 
-// bool reactorIsNotOldReactor() {
-    // if ((ReactorType != PreviousReactorType) or (ReactorLevel != PreviousReactorLevel)) return true;
-    // return false;
-// }
+bool reactorIsNotOldReactor() {
+    if ((ReactorType != PreviousReactorType && ReactorType != 0) or (ReactorLevel != PreviousReactorLevel && ReactorLevel != 0)) return true;
+    return false;
+}
 
 void resetReactorCountdown() {
     if (isReactorActive()) {
