@@ -93,7 +93,7 @@ void materialCalculations(CSceneVehicleVisState@ state) {
     }
 }
 
-void reactorCalculations(CSceneVehicleVisState@ state) {
+void reactorCalculations() {
     if (ReactorFinalCountdown == 0 && ReactorLevel != 0 && CountdownTime <= 1030 && CountdownTime >= 980) {
         CountdownTime = 1029;
     }
