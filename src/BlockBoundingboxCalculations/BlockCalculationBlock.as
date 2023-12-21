@@ -1,17 +1,17 @@
 bool hasCalculatedReactorBlocks = false;
 
+// Arrays for regular reactor blocks
 array<string> reactorBlockNames;
 array<vec3> reactorBlockGridPositions;
 array<vec3> reactorBlockWorldPositions;
 array<int> reactorBlockIndices;
 
-
-// #region All reactor granting BLOCKS (wood is not implemented yet xdd), (Items (gates) are not included)
-
-    // Road (-bad)
-    
-
-// #endregion
+// Arrays for ring reactor blocks
+array<string> ringReactorBlockNames;
+array<vec3> ringReactorBlockGridPositions;
+array<vec3> ringReactorBlockWorldPositions;
+array<int> ringReactorBlockIndices;
+array<int> ringReactorBlockRotations;
 
 void reactorBlockHitboxCalculationsBlock() {
     CTrackMania@ app = cast<CTrackMania>(GetApp());
@@ -40,9 +40,11 @@ void reactorBlockHitboxCalculationsBlock() {
     for (uint i = 0; i < blocksArray.Length; i++) {
         string blockName = blocksArray[i].BlockInfo.Name;
         vec3 blockCoord = vec3(blocksArray[i].CoordX, blocksArray[i].CoordY, blocksArray[i].CoordZ);
+        vec3 blockPos = CoordToPos(blockCoord);
+        int blockRotation = getBlockRotation(blocksArray[i]);
 
         if (isReactorBlock(blockName)) {
-            vec3 blockPos = CoordToPos(blockCoord);
+            // Handle regular reactor blocks
             reactorBlockNames.InsertLast(blockName);
             reactorBlockGridPositions.InsertLast(blockCoord);
             reactorBlockWorldPositions.InsertLast(blockPos);
@@ -50,6 +52,17 @@ void reactorBlockHitboxCalculationsBlock() {
 
             log("Added reactor block: " + blockName + " at position: " + blockPos.ToString(), LogLevel::InfoG, 243);
         }
+        if (isRingReactorBlock(blockName)) {
+            // Handle ring reactor blocks
+            ringReactorBlockNames.InsertLast(blockName);
+            ringReactorBlockGridPositions.InsertLast(blockCoord);
+            ringReactorBlockWorldPositions.InsertLast(blockPos);
+            ringReactorBlockIndices.InsertLast(i);
+            ringReactorBlockRotations.InsertLast(blockRotation);
+
+            log("Added ring reactor block: " + blockName + " at position: " + blockPos.ToString() + " with rotation: " + blockRotation, LogLevel::InfoG, 243);
+        }
+
     }
 
     hasCalculatedReactorBlocks = true;
@@ -87,6 +100,20 @@ void cacheReactorBlocks() {
     // ...
 }
 
+bool isRingReactorBlock(const string &in blockName) {
+    return reactorEffectRing.Find(blockName) >= 0;
+}
+
+int getBlockRotation(CGameCtnBlock@ block) {
+    switch (block.BlockDir) {
+        case CGameCtnBlock::ECardinalDirections::North: return 0;
+        case CGameCtnBlock::ECardinalDirections::East: return 90;
+        case CGameCtnBlock::ECardinalDirections::South: return 180;
+        case CGameCtnBlock::ECardinalDirections::West: return 270;
+    }
+    return 0;
+}
+
 void checkCarPosition() {
     vec3 carPosition = vec3(carPositionX, carPositionY, carPositionZ);
     vec3 carOrientation = vec3(carOrientation.x, carOrientation.y, carOrientation.z);
@@ -94,11 +121,20 @@ void checkCarPosition() {
     array<vec3> carCorners = calculateCarBoundingBox(carPosition, carOrientation);
 
     /* Dot Rendering Yoinked from ArEyeses */
-    for (uint i = 0; i < carCorners.Length; i++) {
-        renderDot(carCorners[i]);
+        for (uint i = 0; i < carCorners.Length; i++) {
+            renderDot(carCorners[i]);
+        }
+    //
+
+    // Check ring reactor blocks
+    for (uint i = 0; i < ringReactorBlockWorldPositions.Length; i++) {
+        if (isCarWithinRingReactorBoundingBox(carCorners, ringReactorBlockWorldPositions[i], ringReactorBlockIndices[i])) {
+            resetReactorCountdown();
+            // Additional logic for ring reactor blocks if needed
+        }
     }
 
-
+    // Check regular reactor blocks
     for (uint i = 0; i < reactorBlockWorldPositions.Length; i++) {
         if (isCarWithinBoundingBox(carCorners, reactorBlockWorldPositions[i])) {
             if (isTouchingGround) {
@@ -111,25 +147,29 @@ void checkCarPosition() {
 }
 
 /* Dot Rendering Yoinked from ArEyeses */
-float dotSize = 2;
+    float dotSize = 2;
 
-bool renderDots = false;
+    bool renderDots = false;
 
-void renderDot(const vec3 &in pos3D) {
-    if (!renderDots) return; 
-    vec3 pos = Camera::ToScreen(pos3D);
-    if (pos.z >= 0) return;
+    void renderDot(const vec3 &in pos3D) {
+        if (!renderDots) return; 
+        vec3 pos = Camera::ToScreen(pos3D);
+        if (pos.z >= 0) return;
 
-    float size;
-    float distance = Math::Sqrt(-pos.z / 32);
-    size = (2 * dotSize * (distance + 3)) / (distance);
+        float size;
+        float distance = Math::Sqrt(-pos.z / 32);
+        size = (2 * dotSize * (distance + 3)) / (distance);
 
-    nvg::BeginPath();
-    nvg::Circle(pos.xy, size);
-    nvg::FillColor(vec4(1.f, 0.f, 0.f, 0.9f));
-    nvg::Fill();
+        nvg::BeginPath();
+        nvg::Circle(pos.xy, size);
+        nvg::FillColor(vec4(1.f, 0.f, 0.f, 0.9f));
+        nvg::Fill();
+    }
+//
+
+bool isCarWithinRingReactorBoundingBox(const array<vec3> &in carCorners, const vec3 &in blockCenterPos, int blockRotation) {
+    
 }
-
 
 bool isCarWithinBoundingBox(const array<vec3> &in carCorners, const vec3 &in blockCornerPos, float threshold = 0) {
     for (uint i = 0; i < carCorners.Length; i++) {
