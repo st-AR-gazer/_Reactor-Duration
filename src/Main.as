@@ -9,9 +9,10 @@ void Update(float dt) {
         return;
     }
     
-
     auto script = cast<CSmScriptPlayer>(playground.Arena.Players[0].ScriptAPI);
     if (script is null) return; 
+
+    onUpdateOrRenderFrame();
 
     auto scene = cast<ISceneVis@>(app.GameScene);
     if (scene is null) return;
