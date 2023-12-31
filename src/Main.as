@@ -28,9 +28,7 @@ void Update(float dt) {
         @vis = VehicleState::GetSingularVis(scene);
     }
     if (vis is null) return;
-
-    time(dt, port);
-
+    
     // Game states
     getCarStates(script, vis.AsyncState);
     getGameStates(script);
@@ -45,4 +43,6 @@ void Update(float dt) {
     Draw();
     drawVisualReactorCountdown();
     drawVignetteReactorCountdown(dt);
+
+    time(dt, port);
 }
