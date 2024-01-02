@@ -8,7 +8,6 @@ int absolute(int value) {
 void time(float dt, CInputPort@ port) {
     if (ReactorLevel == 0) {
         CountdownTime = 0;
-        return;
     }
 
     if (10 >= CountdownTime) {
