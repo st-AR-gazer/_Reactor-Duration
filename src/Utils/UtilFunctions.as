@@ -6,12 +6,12 @@ bool isReactorActive() {
 void resetReactorCountdown() {
     if (isReactorActive()) {
         if (ReactorFinalCountdown == 0.01 or ReactorFinalCountdown == 0.05) {
-            CountdownTime = 950;
+            g_countdownTime = 950;
         } else {
-            CountdownTime = 6000;
+            g_countdownTime = 6000;
         }
     } else {
-        CountdownTime = 0;
+        g_countdownTime = 0;
     }
     absoluteStartTime = Time::get_Now();
 }

@@ -1,3 +1,4 @@
+/*
 // World position
 vec3 WorldPoss;
 
@@ -101,14 +102,15 @@ void getCarStates(CSmScriptPlayer@ script, CSceneVehicleVisState@ state) {
 
 
 // Game states
-int CountdownTime = 0;
+int g_countdownTime = 0;
 uint PreviousTime = Time::get_Now();
 
 // RaceTime
 int currentRaceTime = -1;
-int previousRaceTime = -1;
+int oldRaceTime = -1;
 
 void getGameStates(CSmScriptPlayer@ script) {
-    previousRaceTime = currentRaceTime;
+    oldRaceTime = currentRaceTime;
     currentRaceTime = script.CurrentRaceTime;
 }
+*/

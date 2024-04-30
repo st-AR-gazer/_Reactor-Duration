@@ -28,14 +28,9 @@ void Update(float dt) {
         @vis = VehicleState::GetSingularVis(scene);
     }
     if (vis is null) return;
-    
-    // Game states
-    getCarStates(script, vis.AsyncState);
-    getGameStates(script);
 
-    // Reactor Calculations
-    reactorBlockHitboxCalculationsBlock();
-    reactorBlockHitboxCalculationsFreeBlock();
+    GetStates(script, vis.AsyncState);
+    HitboxCalc();
 
     legacyReactorCalculations(vis.AsyncState);
 
@@ -44,5 +39,5 @@ void Update(float dt) {
     drawVisualReactorCountdown();
     drawVignetteReactorCountdown(dt);
 
-    time(dt, port);
+    updateCountdownTime(dt, port);
 }

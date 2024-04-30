@@ -30,7 +30,7 @@ void drawVisualReactorCountdown() {
             strokeColor = vec4(0, 0, 0, 0);
             backgroundFillColor = vec4(0, 0, 0, Tool_Opacity);
 
-            float widthChange = 283 * (CountdownTime / 6000.0) - 1;
+            float widthChange = 283 * (g_countdownTime / 6000.0) - 1;
             sizeChange = vec2(widthChange, 40);
 
             startPos = vec2(7, 303);
@@ -42,7 +42,7 @@ void drawVisualReactorCountdown() {
             strokeColor = vec4(0, 0, 0, 0);
             backgroundFillColor = vec4(0, 0, 0, Tool_Opacity);
 
-            float heightChange = 286 * (CountdownTime / 6000.0) - 1;
+            float heightChange = 286 * (g_countdownTime / 6000.0) - 1;
             sizeChange = vec2(46, heightChange);
             startPos = vec2(1157, 585 - heightChange);
         }
@@ -56,7 +56,7 @@ void drawVisualReactorCountdown() {
             strokeColor = vec4(0, 0, 0, 0);
             backgroundFillColor = vec4(0, 0, 0, Tool_Opacity + 0.3);
 
-            float widthChange = 283 * (CountdownTime / 6000.0) - 1;
+            float widthChange = 283 * (g_countdownTime / 6000.0) - 1;
             sizeChange = vec2(widthChange, 40);
             startPos = vec2(pos.x + 9, Top_Middle_Height_Offset + 9);
         }
@@ -70,7 +70,7 @@ void drawVisualReactorCountdown() {
             strokeColor = vec4(0, 0, 0, 0);
             backgroundFillColor = vec4(0, 0, 0, Tool_Opacity);
 
-            float heightChange = 286 * (CountdownTime / 6000.0) - 1;
+            float heightChange = 286 * (g_countdownTime / 6000.0) - 1;
             sizeChange = vec2(46, heightChange);
             startPos = vec2((screenWidth - elementWidth) / 2 + 7, 300 - 8 - heightChange);
         }
@@ -89,7 +89,7 @@ void drawVisualReactorCountdown() {
                 strokeColor = vec4(0, 0, 0, 0);
                 backgroundFillColor = vec4(0, 0, 0, Tool_Opacity);
 
-                float heightChange = Custom_Height_Tool_Cooldown * (CountdownTime / 6000.0) - 1;
+                float heightChange = Custom_Height_Tool_Cooldown * (g_countdownTime / 6000.0) - 1;
 
                 sizeChange = vec2(size.x - 14, heightChange);
 
@@ -110,7 +110,7 @@ void drawVisualReactorCountdown() {
                     backgroundFillColor = vec4(0, 0, 0, Tool_Opacity);
                 }
 
-                float heightChange = Custom_Height_Tool_Cooldown * (CountdownTime / 6000.0) - 1;
+                float heightChange = Custom_Height_Tool_Cooldown * (g_countdownTime / 6000.0) - 1;
                 sizeChange = vec2(Custom_Width_Tool_Cooldown, heightChange);
                 if (Force_Middle) {
                     float screenWidth = Draw::GetWidth();

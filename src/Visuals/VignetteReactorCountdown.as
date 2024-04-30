@@ -15,15 +15,15 @@ void drawVignetteReactorCountdown(float dt)
     
     calculatedVignetteColor = vec4(get_Normalized_Vignette_Color(), get_Normalized_Vignette_Opacity());
 
-    if (Last_Pulse_Is_White && Enable_Final_Pulse__Vignette && CountdownTime >= 1 && CountdownTime <= 50) {
+    if (Last_Pulse_Is_White && Enable_Final_Pulse__Vignette && g_countdownTime >= 1 && g_countdownTime <= 50) {
         calculatedVignetteColor = vec4(1, 1, 1, get_Normalized_Vignette_Opacity());
     }
 
     if (Use_Four_Pulses) {
-        if ((CountdownTime >= 850 && CountdownTime <= 949) || 
-            (CountdownTime >= 550 && CountdownTime <= 650) || 
-            (CountdownTime >= 250 && CountdownTime <= 350) || 
-            (Enable_Final_Pulse__Vignette && CountdownTime >= 1 && CountdownTime <= 100))
+        if ((g_countdownTime >= 850 && g_countdownTime <= 949) || 
+            (g_countdownTime >= 550 && g_countdownTime <= 650) || 
+            (g_countdownTime >= 250 && g_countdownTime <= 350) || 
+            (Enable_Final_Pulse__Vignette && g_countdownTime >= 1 && g_countdownTime <= 100))
         {
             Vignette_Opacity -= fadeRate * dt;
             if (Vignette_Opacity < 0.0) {
@@ -34,9 +34,9 @@ void drawVignetteReactorCountdown(float dt)
         }
     }
     else {
-        if ((CountdownTime >= 850 && CountdownTime <= 949) || 
-            (CountdownTime >= 450 && CountdownTime <= 550) || 
-            (Enable_Final_Pulse__Vignette && CountdownTime >= 1 && CountdownTime <= 100))
+        if ((g_countdownTime >= 850 && g_countdownTime <= 949) || 
+            (g_countdownTime >= 450 && g_countdownTime <= 550) || 
+            (Enable_Final_Pulse__Vignette && g_countdownTime >= 1 && g_countdownTime <= 100))
         {
         Vignette_Opacity -= fadeRate * dt;
             if (Vignette_Opacity < 0.0) {
@@ -95,18 +95,18 @@ void DrawVignette(float intensity, vec4 color)
 float GetVignetteIntensity()
 {
     if (Use_Four_Pulses) {
-        if ((CountdownTime >= 850 && CountdownTime <= 949) || 
-            (CountdownTime >= int(550) && CountdownTime <= int(650)) || 
-            (CountdownTime >= int(250) && CountdownTime <= int(350)) || 
-            (Enable_Final_Pulse__Vignette && CountdownTime >= 1 && CountdownTime <= 100))
+        if ((g_countdownTime >= 850 && g_countdownTime <= 949) || 
+            (g_countdownTime >= int(550) && g_countdownTime <= int(650)) || 
+            (g_countdownTime >= int(250) && g_countdownTime <= int(350)) || 
+            (Enable_Final_Pulse__Vignette && g_countdownTime >= 1 && g_countdownTime <= 100))
         {
             return 1.0;
         }
         return 0.0;
     } else {
-        if ((CountdownTime >= 850 && CountdownTime <= 949) || 
-            (CountdownTime >= int(450) && CountdownTime <= int(550)) || 
-            (Enable_Final_Pulse__Vignette && CountdownTime >= 1 && CountdownTime <= 100))
+        if ((g_countdownTime >= 850 && g_countdownTime <= 949) || 
+            (g_countdownTime >= int(450) && g_countdownTime <= int(550)) || 
+            (Enable_Final_Pulse__Vignette && g_countdownTime >= 1 && g_countdownTime <= 100))
         {
             return 1.0;
         }
