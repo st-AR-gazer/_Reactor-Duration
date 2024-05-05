@@ -16,7 +16,7 @@ float g_carRotationRoll;
 
 // 
 
-int g_reactorFinalCountdown;
+float g_reactorFinalCountdown;
 
 uint g_reactorLevel;
 uint g_reactorType;
@@ -78,6 +78,7 @@ void GetCarStates(CSmScriptPlayer@ script, CSceneVehicleVisState@ state) {
     g_carRotationPitch = script.AimPitch;
     g_carRotationYaw = script.AimYaw;
     g_carRotationRoll = script.AimRoll;
+    
     g_carRotation = vec3(g_carRotationPitch, g_carRotationYaw, g_carRotationRoll);
 
     g_reactorLevel = state.ReactorBoostLvl;

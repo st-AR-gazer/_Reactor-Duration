@@ -1,9 +1,5 @@
-float DegToRad(float degrees) {
-    return degrees * Math::PI / 180.0f;
-}
-
 vec3 RotateX(const vec3 &in point, float angle) {
-    float rad = DegToRad(angle);
+    float rad = Math::ToRad(angle);
     float cosTheta = Math::Cos(rad);
     float sinTheta = Math::Sin(rad);
     return vec3(
@@ -14,7 +10,7 @@ vec3 RotateX(const vec3 &in point, float angle) {
 }
 
 vec3 RotateY(const vec3 &in point, float angle) {
-    float rad = DegToRad(angle);
+    float rad = Math::ToRad(angle);
     float cosTheta = Math::Cos(rad);
     float sinTheta = Math::Sin(rad);
     return vec3(
@@ -25,7 +21,7 @@ vec3 RotateY(const vec3 &in point, float angle) {
 }
 
 vec3 RotateZ(const vec3 &in point, float angle) {
-    float rad = DegToRad(angle);
+    float rad = Math::ToRad(angle);
     float cosTheta = Math::Cos(rad);
     float sinTheta = Math::Sin(rad);
     return vec3(

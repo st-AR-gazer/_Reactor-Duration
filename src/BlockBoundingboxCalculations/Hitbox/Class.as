@@ -35,9 +35,9 @@ class Hitbox {
         points[7] = vec3(-halfSize.x, halfSize.y, halfSize.z);
 
         for (uint i = 0; i < 8; i++) {
-            points[i] = RotateZ(points[i], rotation.z);
-            points[i] = RotateY(points[i], rotation.y);
-            points[i] = RotateX(points[i], rotation.x);
+            points[i] = RotateY(points[i], rotation.y); // Yaw
+            points[i] = RotateX(points[i], rotation.x); // Pitch
+            points[i] = RotateZ(points[i], rotation.z); // Roll
 
             points[i] += position;
         }

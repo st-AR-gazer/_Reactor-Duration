@@ -29,8 +29,6 @@ void reactorBlockHitboxCalculationsBlock() {
             return;
         }
 
-        checkCarPosition();
-        
         if (hasCalculatedReactorBlocks) {
             return;
         }
@@ -53,25 +51,6 @@ void reactorBlockHitboxCalculationsBlock() {
             reactorBlockIndices.InsertLast(i);
 
             log("Added reactor block: " + blockName + " at position: " + blockPos.ToString(), LogLevel::InfoG, 55);
-        }
-    }
-    // Ring blocks
-    for (uint i = 0; i < blocksArray.Length; i++) {
-        string blockName = blocksArray[i].BlockInfo.Name;
-        vec3 blockCoord = vec3(blocksArray[i].CoordX, blocksArray[i].CoordY, blocksArray[i].CoordZ);
-        vec3 blockPos = CoordToPos(blockCoord);
-        int blockRotation = getBlockRotation(blocksArray[i]);
-
-        if (isRingReactorBlock(blockName)) {
-            ringReactorBlockNames.InsertLast(blockName);
-            ringReactorBlockGridPositions.InsertLast(blockCoord);
-            ringReactorBlockWorldPositions.InsertLast(blockPos);
-            ringReactorBlockIndices.InsertLast(i);
-            ringReactorBlockRotations.InsertLast(blockRotation);
-
-            renderRingReactorDots(blockPos, blockRotation);
-
-            log("Added ring reactor block: " + blockName + " at position: " + blockPos.ToString() + " with rotation: " + blockRotation, LogLevel::InfoG, 74);
         }
     }
 
@@ -108,7 +87,7 @@ int getBlockRotation(CGameCtnBlock@ block) {
     return 0;
 }
 
-shared vec3 CoordToPos(vec3 coord) {
+vec3 CoordToPos(vec3 coord) {
     vec3 pos = vec3(coord.x * 32, (int(coord.y) - 8) * 8, coord.z * 32);
     log("CoordToPos: Converted " + coord.ToString() + " to " + pos.ToString(), LogLevel::Info, 113);
     return pos;

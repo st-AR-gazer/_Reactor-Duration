@@ -63,7 +63,7 @@ void DrawVignette(float intensity, vec4 color)
         float outerRadius = screenWidth/2;
 
         if (use_Default_Cooldown_Colors) {
-            if (ReactorLevel == 1) {
+            if (g_reactorLevel == 1) {
                 nvg::Paint paint = nvg::RadialGradient(center, innerRadius, outerRadius, vec4(0, 1, 0, 0), vec4(0, 1, 0, color.w * intensity));
 
                 nvg::BeginPath();
@@ -71,7 +71,7 @@ void DrawVignette(float intensity, vec4 color)
                 nvg::FillPaint(paint);
                 nvg::Fill();
                 nvg::ClosePath();
-            } else if (ReactorLevel == 2) {
+            } else if (g_reactorLevel == 2) {
                 nvg::Paint paint = nvg::RadialGradient(center, innerRadius, outerRadius, vec4(1, 0, 0, 0), vec4(1, 0, 0, color.w * intensity));
 
                 nvg::BeginPath();

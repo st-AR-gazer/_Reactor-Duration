@@ -5,17 +5,17 @@ void drawVisualReactorCountdown() {
     vec4 reactorGreen = vec4(0, 1, 0, Tool_Opacity_Reactor);
     vec4 reactorRed = vec4(1, 0, 0, Tool_Opacity_Reactor);
 
-    if (ReactorLevel == ESceneVehicleVisReactorBoostLvl::None) {
+    if (g_reactorLevel == ESceneVehicleVisReactorBoostLvl::None) {
         fillColor = reactorGray;
     }
-    if (ReactorLevel == ESceneVehicleVisReactorBoostLvl::Lvl1) {
+    if (g_reactorLevel == ESceneVehicleVisReactorBoostLvl::Lvl1) {
         fillColor = reactorGreen;
     }
-    if (ReactorLevel == ESceneVehicleVisReactorBoostLvl::Lvl2) {
+    if (g_reactorLevel == ESceneVehicleVisReactorBoostLvl::Lvl2) {
         fillColor = reactorRed;
     }
 
-    if (ReactorLevel != ESceneVehicleVisReactorBoostLvl::None) {
+    if (g_reactorLevel != ESceneVehicleVisReactorBoostLvl::None) {
         vec2 pos;
         vec2 size;
         vec4 strokeColor;

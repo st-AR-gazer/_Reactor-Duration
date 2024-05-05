@@ -12,8 +12,6 @@ void Update(float dt) {
     auto script = cast<CSmScriptPlayer>(playground.Arena.Players[0].ScriptAPI);
     if (script is null) return; 
 
-    onUpdateOrRenderFrame();
-
     auto scene = cast<ISceneVis@>(app.GameScene);
     if (scene is null) return;
 
@@ -32,7 +30,7 @@ void Update(float dt) {
     GetStates(script, vis.AsyncState);
     HitboxCalc();
 
-    legacyReactorCalculations(vis.AsyncState);
+    legacyReactorCalculations();
 
     // Visuals
     Draw();
