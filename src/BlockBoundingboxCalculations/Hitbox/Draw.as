@@ -1,4 +1,10 @@
 // File: Draw.as
+void DrawAllHitboxes() {
+    for (uint i = 0; i < blockHitboxes.Length; i++) {
+        DrawHitbox(blockHitboxes[i]);
+    }
+}
+
 void DrawHitbox(const Hitbox &in hitbox) {
     const array<vec3> points = hitbox.GetTransformedPoints();
 

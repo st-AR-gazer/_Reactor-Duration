@@ -3,11 +3,16 @@ void Update(float dt) {
     if (app is null) return;
     // 
 
-    auto playground = cast<CSmArenaClient>(app.CurrentPlayground);
-    if (playground is null || playground.Arena.Players.Length == 0) {
+    CGameCtnChallenge@ map = cast<CGameCtnChallenge@>(app.RootMap);
+    if (app.RootMap is null) {
         hasCalculatedReactorBlocks = false;
-        return;
+        blockHitboxes.Resize(0);
+
+        return; 
     }
+
+    auto playground = cast<CSmArenaClient>(app.CurrentPlayground);
+    if (playground is null || playground.Arena.Players.Length == 0) { return; }
     
     auto script = cast<CSmScriptPlayer>(playground.Arena.Players[0].ScriptAPI);
     if (script is null) return; 
@@ -32,7 +37,9 @@ void Update(float dt) {
 
     legacyReactorCalculations();
 
+    DrawAllHitboxes();
     // Visuals
+
     Draw();
     drawVisualReactorCountdown();
     drawVignetteReactorCountdown(dt);

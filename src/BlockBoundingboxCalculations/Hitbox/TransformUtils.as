@@ -31,12 +31,17 @@ vec3 RotateZ(const vec3 &in point, float angle) {
     );
 }
 
+const uint16 O_CGameCtnBlock_DirOffset = GetOffset("CGameCtnBlock", "Dir");
+const uint16 FreeBlockPosOffset = O_CGameCtnBlock_DirOffset + 0x8;
+const uint16 FreeBlockRotOffset = FreeBlockPosOffset + 0xC;
+
 vec3 GetBlockRotation(CGameCtnBlock@ block) {
     if (IsBlockFree(block)) {
         auto ypr = Dev::GetOffsetVec3(block, FreeBlockRotOffset);
-        return vec3(ypr.y, ypr.x, ypr.z);
+        log("GetBlockRotation: Free block rotation: " + ypr.ToString(), LogLevel::Warn, 113);
+        return vec3(ypr.y * 57.25, ypr.x * 57.25, ypr.z * 57.25);
     }
-    return vec3(0,  (int(block.Dir)), 0);
+    return vec3(0, 0, 0);
 }
 
 bool IsBlockFree(CGameCtnBlock@ block) {
@@ -62,4 +67,27 @@ float NormalizeAngle(float angle) {
         print("NormalizeAngle: count >= 100, " + orig + " -> " + angle);
     }
     return angle;
+}
+
+
+vec3 GetBlockPosition(CGameCtnBlock@ block) {
+    if (IsBlockFree(block)) {
+        auto pos = Dev::GetOffsetVec3(block, FreeBlockPosOffset);
+        log("GetBlockPosition: Free block position: " + pos.ToString(), LogLevel::_, 113);
+        return pos;
+    }
+    return CoordToPos(block.Coord);
+
+}
+
+vec3 CoordToPos(nat3 coord) {
+    vec3 pos = vec3(coord.x * 32, (int(coord.y) - 8) * 8, coord.z * 32);
+    log("CoordToPos: Converted " + coord.ToString() + " to " + pos.ToString(), LogLevel::Info, 113);
+    return pos;
+}
+
+vec3 CoordToPos(vec3 coord) {
+    vec3 pos = vec3(coord.x * 32, (int(coord.y) - 8) * 8, coord.z * 32);
+    log("CoordToPos: Converted " + coord.ToString() + " to " + pos.ToString(), LogLevel::Info, 113);
+    return pos;
 }

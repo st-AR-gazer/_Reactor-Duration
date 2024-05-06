@@ -1,18 +1,17 @@
 const int   FULL_ROTATION = 360;
 const float DEG_90_IN_FULL_ROTATION = 90 * (FULL_ROTATION / 360.0); 
 
-const float CAR_LENGTH = 3.7;
+const float CAR_LENGTH = 3.9;
 const float CAR_HEIGHT = 1;
 const float CAR_WIDTH = 2.132;
 
-array<vec3> HitboxCar() {
+array<vec3> CreateCarHitbox() {
     vec4 carHitboxColor = vec4(1, 1, 1, 0.5);
 
     vec3 carPos = g_carPosition;
     vec3 carRot = g_carRotation;
 
-    vec3 offsetVector = vec3(/*-0.3*/0, 0.4, 0.0);
-    vec3 offsetCarPos = carPos + offsetVector;
+    vec3 offsetCarPos = vec3(carPos.x, carPos.y + 0.45, carPos.z);
 
     // Using a Y axis only rotation till I can figure out how to rotate the hitbox properly xdd
     // Probably gonna move onto block hitboxes next since this is making me go insane...
@@ -45,7 +44,7 @@ void Render() {
 
     if (UI::Button("Copy")) {
         string settings = 
-            "carposition(" + g_carPosition.x + ", " + g_carPosition.y + ", " + g_carPosition.z + "), " + "carrotation(" + g_carRotation.x + ", " + g_carRotation.y + ", " + g_carRotation.z + ");";
+            "tmp_carPosition(" + g_carPosition.x + ", " + g_carPosition.y + ", " + g_carPosition.z + "), " + "tmp_carRotation(" + g_carRotation.x + ", " + g_carRotation.y + ", " + g_carRotation.z + ");";
         IO::SetClipboard(settings);
     }
 
