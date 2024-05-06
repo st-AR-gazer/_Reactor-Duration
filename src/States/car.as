@@ -23,7 +23,7 @@ uint g_reactorType;
 uint g_oldReactorLevel;
 uint g_oldReactorType;
 
-bool g_isReactorActive;
+bool g_IsReactorActive;
 
 bool g_isGroundContact;
 
@@ -87,7 +87,7 @@ void GetCarStates(CSmScriptPlayer@ script, CSceneVehicleVisState@ state) {
     g_reactorFinalCountdown = Dev::GetOffsetFloat(state, 380);;
 
     if (g_reactorType == 0 && g_reactorLevel == 0) {
-        g_isReactorActive = false;
+        g_IsReactorActive = false;
     }
 
     g_isGroundContact = state.IsGroundContact;

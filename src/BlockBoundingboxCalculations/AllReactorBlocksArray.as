@@ -30,31 +30,43 @@
         "RoadTechSpecialBoost2DiagRight"
     };
 
+
     // Banked Dirt (-bad)
-    array<string> bankedDirt = {
+    array<string> roadDirtFlat = {
         "RoadDirtSpecialBoost",
         "RoadDirtSpecialBoost2"
     };
 
-    array<string> bankedDirtSlopeUp = {
+    array<string> roadDirtSlopeUp = {
         "RoadDirtSpecialBoostSlopeUp",
         "RoadDirtSpecialBoost2SlopeUp"
     };
 
-    array<string> bankedDirtSlopeDown = {
+    array<string> roadDirtSlopeDown = {
         "RoadDirtSpecialBoostSlopeDown",
         "RoadDirtSpecialBoost2SlopeDown"
     };
 
-    array<string> bankedDirtTiltLeft = {
+    array<string> roadDirtTiltLeft = {
         "RoadDirtSpecialBoostTiltLeft",
         "RoadDirtSpecialBoost2TiltLeft"
     };
 
-    array<string> bankedDirtTiltRight = {
+    array<string> roadDirtTiltRight = {
         "RoadDirtSpecialBoostTiltRight",
         "RoadDirtSpecialBoost2TiltRight"
     };
+
+    array<string> roadDirtDiagLeft = {
+        "RoadDirtSpecialBoostDiagLeft",
+        "RoadDirtSpecialBoost2DiagLeft"
+    };
+
+    array<string> roadDirtDiagRight = {
+        "RoadDirtSpecialBoostDiagRight",
+        "RoadDirtSpecialBoost2DiagRight"
+    };
+
 
     // Sausage
     array<string> sausageFlat = {
@@ -82,6 +94,17 @@
         "RoadBumpSpecialBoost2TiltRight"
     };
 
+    array<string> sausageDiagLeft = {
+        "RoadBumpSpecialBoostDiagLeft",
+        "RoadBumpSpecialBoost2DiagLeft"
+    };
+
+    array<string> sausageDiagRight = {
+        "RoadBumpSpecialBoostDiagRight",
+        "RoadBumpSpecialBoost2DiagRight"
+    };
+
+
     // Bobsleigh
     array<string> bobsleighFlat = {
         "RoadIceSpecialBoost",
@@ -106,6 +129,21 @@
     array<string> bobsleighTiltRight = {
         "RoadIceWithWallSpecialBoostRight",
         "RoadIceWithWallSpecialBoost2Right"
+    };
+
+    array<string> bobsleighDiagLeft = {
+        "RoadIceWithWallSpecialBoostDiagLeft",
+        "RoadIceWithWallSpecialBoost2DiagLeft"
+    };
+
+    array<string> bobsleighDiagRight = {
+        "RoadIceWithWallSpecialBoostDiagRight",
+        "RoadIceWithWallSpecialBoost2DiagRight"
+    };
+
+    array<string> bobsleighTall = {
+        "RoadIceWithWallSpecialBoost",
+        "RoadIceWithWallSpecialBoost2"
     };
 
 

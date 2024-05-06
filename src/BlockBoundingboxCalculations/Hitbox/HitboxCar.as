@@ -1,4 +1,3 @@
-const float PI = 3.1415;
 const int   FULL_ROTATION = 360;
 const float DEG_90_IN_FULL_ROTATION = 90 * (FULL_ROTATION / 360.0); 
 

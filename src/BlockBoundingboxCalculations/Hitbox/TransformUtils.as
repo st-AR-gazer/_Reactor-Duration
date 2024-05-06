@@ -30,3 +30,36 @@ vec3 RotateZ(const vec3 &in point, float angle) {
         point.z
     );
 }
+
+vec3 GetBlockRotation(CGameCtnBlock@ block) {
+    if (IsBlockFree(block)) {
+        auto ypr = Dev::GetOffsetVec3(block, FreeBlockRotOffset);
+        return vec3(ypr.y, ypr.x, ypr.z);
+    }
+    return vec3(0,  (int(block.Dir)), 0);
+}
+
+bool IsBlockFree(CGameCtnBlock@ block) {
+    return int(block.CoordX) < 0;
+}
+
+float CardinalDirectionToYaw(int dir) {
+    return NormalizeAngle(-1.0 * float(dir) * Math::PI/2.);
+}
+
+float NormalizeAngle(float angle) {
+    float orig = angle;
+    uint count = 0;
+    while (angle < NegPI && count < 100) {
+        angle += TAU;
+        count++;
+    }
+    while (angle >= PI && count < 100) {
+        angle -= TAU;
+        count++;
+    }
+    if (count >= 100) {
+        print("NormalizeAngle: count >= 100, " + orig + " -> " + angle);
+    }
+    return angle;
+}
