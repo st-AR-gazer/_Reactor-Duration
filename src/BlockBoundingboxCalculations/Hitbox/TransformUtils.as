@@ -38,11 +38,22 @@ const uint16 FreeBlockRotOffset = FreeBlockPosOffset + 0xC;
 vec3 GetBlockRotation(CGameCtnBlock@ block) {
     if (IsBlockFree(block)) {
         auto ypr = Dev::GetOffsetVec3(block, FreeBlockRotOffset);
-        log("GetBlockRotation: Free block rotation: " + ypr.ToString(), LogLevel::Warn, 113);
-        return vec3(ypr.y * 57.25, ypr.x * 57.25, ypr.z * 57.25);
+        vec3 ypr_degrees(
+            ypr.y * (180.0 / PI),
+            ypr.x * (180.0 / PI),
+            ypr.z * (180.0 / -PI)
+        );
+        
+        if (ypr_degrees.x < 0) ypr_degrees.x += 360;
+        if (ypr_degrees.y < 0) ypr_degrees.y += 360;
+        if (ypr_degrees.z < 0) ypr_degrees.z += 360;
+
+        log("GetBlockRotation: Free block rotation: " + ypr_degrees.ToString(), LogLevel::Warn, 113);
+        return ypr_degrees;
     }
     return vec3(0, 0, 0);
 }
+
 
 bool IsBlockFree(CGameCtnBlock@ block) {
     return int(block.CoordX) < 0;
