@@ -1,14 +1,11 @@
 // File: Draw.as
-void DrawAllHitboxes() {
-    for (uint i = 0; i < blockHitboxes.Length; i++) {
-        DrawHitbox(blockHitboxes[i]);
-    }
-}
-
 void DrawHitbox(const Hitbox &in hitbox) {
     const array<vec3> points = hitbox.GetTransformedPoints();
 
-    // print(vec3(points[0].x, points[0].y, points[0].z).ToString() + ", " + vec3(points[1].x, points[1].y, points[1].z).ToString() + ", " + vec3(points[2].x, points[2].y, points[2].z).ToString() + ", " + vec3(points[3].x, points[3].y, points[3].z).ToString() + ", " + vec3(points[4].x, points[4].y, points[4].z).ToString() + ", " + vec3(points[5].x, points[5].y, points[5].z).ToString() + ", " + vec3(points[6].x, points[6].y, points[6].z).ToString() + ", " + vec3(points[7].x, points[7].y, points[7].z).ToString());
+    // log("Hitbox ID: " + hitbox.id + " Transformed Points:", LogLevel::Info);
+    // for (uint i = 0; i < points.Length; i++) {
+    //     log("Point " + i + ": (" + points[i].x + ", " + points[i].y + ", " + points[i].z + ")", LogLevel::Info);
+    // }
 
     int[] edges = {
         0, 1,  1, 2,  2, 3,  3, 0,  // Bottom square edges
@@ -34,7 +31,6 @@ void DrawHitbox(const Hitbox &in hitbox) {
         nvg::Stroke();
     }
 }
-
 
 void DrawHitboxPoints(const array<vec3> &in points, const vec4 &in color) {
     int[] edges = {

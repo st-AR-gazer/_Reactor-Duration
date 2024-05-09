@@ -1,3 +1,6 @@
+// Custom
+// int g_countdownTime = 0;
+
 // Vehicle State (preffered)
 vec3 g_carPosition;
 vec3 g_carRotation;

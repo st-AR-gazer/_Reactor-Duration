@@ -3,6 +3,27 @@ bool IsReactorActive() {
     return false;
 }
 
+bool ShouldResetReactor() {
+    CTrackMania@ app = cast<CTrackMania>(GetApp());
+    auto playground = cast<CSmArenaClient>(app.CurrentPlayground);
+    auto scene = cast<ISceneVis@>(app.GameScene);
+    CSceneVehicleVis@ vis;
+    auto player = cast<CSmPlayer@>(playground.GameTerminals[0].GUIPlayer);
+    if (player !is null) {
+        @vis = VehicleState::GetVis(scene, player);
+    } else {
+        @vis = VehicleState::GetSingularVis(scene);
+    }
+
+    if (vis.AsyncState.ReactorBoostLvl != 0 || 
+        vis.AsyncState.ReactorBoostType != 0 || 
+        vis.AsyncState.IsGroundContact) {
+        return true;
+    }
+
+    return false; 
+}
+
 void ResetReactorCountdown() {
     if (IsReactorActive()) {
         if (g_reactorFinalCountdown == 0.01 or g_reactorFinalCountdown == 0.05) {

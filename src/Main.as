@@ -6,7 +6,9 @@ void Update(float dt) {
     CGameCtnChallenge@ map = cast<CGameCtnChallenge@>(app.RootMap);
     if (app.RootMap is null) {
         hasCalculatedReactorBlocks = false;
+        carHitboxes.Resize(0);
         blockHitboxes.Resize(0);
+        itemHitboxes.Resize(0);
 
         return; 
     }
@@ -37,7 +39,6 @@ void Update(float dt) {
 
     legacyReactorCalculations();
 
-    DrawAllHitboxes();
     // Visuals
 
     Draw();
