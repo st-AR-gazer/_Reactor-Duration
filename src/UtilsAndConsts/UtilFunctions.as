@@ -21,7 +21,7 @@ bool ShouldResetReactor() {
         return true;
     }
 
-    return false; 
+    return false;
 }
 
 void ResetReactorCountdown() {

@@ -1,5 +1,5 @@
 [Setting category="Hitboxes" name="Draw Hitboxes"]
-bool S_drawHitboxes = true;
+bool S_drawHitboxes = false;
 
 
 void HitboxCheck() {
