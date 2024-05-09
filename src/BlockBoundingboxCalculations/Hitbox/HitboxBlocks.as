@@ -1,6 +1,5 @@
 bool hasCalculatedReactorBlocks = false;
 
-
 array<Hitbox@> blockHitboxes;
 
 void CreateBlockHitbox() {
