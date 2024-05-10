@@ -7,26 +7,67 @@ const float CAR_WIDTH = 2.132;
 
 array<Hitbox@> carHitboxes;
 
-array<vec3> CreateCarHitbox() {
-    vec4 carHitboxColor = vec4(1, 1, 1, 0.5);
+void CreateCarHitbox() {
+    HitboxCar();
+}
 
-    vec3 carPos = g_carPosition;
-    vec3 carRot = g_carRotation;
+void HitboxCar() {
+    Hitbox@ carHitbox = CarHitboxClassifier();
 
-    vec3 offsetCarPos = vec3(carPos.x, carPos.y + 0.45, carPos.z);
+    DrawHitboxPoints(carHitbox.GetTransformedPoints(), carHitbox.color);
 
+    carHitboxes.Resize(0); carHitboxes.InsertLast(carHitbox);
+}
+
+Hitbox CarHitboxClassifier() {
+    vec3 position = GetCarPosition(g_carPosition);
+    vec3 rotation = GetCarRotation(g_carRotation);
+    vec3 size = GetCarSize();
+    vec3 offest = GetCarOffset();
+    vec4 color = GetCarColor();
+
+    return Hitbox(0, position, size, rotation, offest, color, true);
+}
+
+vec3 GetCarPosition(vec3 carPos) {
+    vec3 position = vec3(carPos.x, 
+                        carPos.y + 0.45, 
+                        carPos.z);
+    return position;
+}
+
+vec3 GetCarRotation(vec3 carRot) {
+    vec3 rotation = vec3(0,                                                                     // pitch
+                        (PI - carRot.y) / (2 * -PI) * FULL_ROTATION + DEG_90_IN_FULL_ROTATION,  // yaw
+                         0);                                                                    // roll
+    return rotation;
+}
+
+vec3 GetCarSize() {
     // Using a Y axis only rotation till I can figure out how to rotate the hitbox properly xdd
     // Probably gonna move onto block hitboxes next since this is making me go insane...
-    vec3 offsetCarRot = vec3(0, (PI - carRot.y) / (2 * -PI) * FULL_ROTATION + DEG_90_IN_FULL_ROTATION, 0);
 
-    Hitbox carHitbox(0, offsetCarPos, vec3(CAR_LENGTH, CAR_HEIGHT, CAR_WIDTH), offsetCarRot, carHitboxColor);
-
-    DrawHitboxPoints(carHitbox.GetTransformedPoints(), carHitboxColor);
-
-    carHitboxes.Resize(0);
-    carHitboxes.InsertLast(carHitbox);
-    return carHitbox.GetTransformedPoints();
+    vec3 size = vec3(CAR_LENGTH, // Length
+                     CAR_HEIGHT, // Height
+                     CAR_WIDTH); // Width
+    return size;
 }
+
+vec3 GetCarOffset() {
+    vec3 offest = vec3(0,   // X
+                       0,   // Y
+                       0);  // Z
+    return offest;
+}
+
+vec4 GetCarColor() {
+    vec4 color = vec4(1,    // Red
+                      1,    // Green
+                      1,    // Blue
+                      0.5); // Alpha
+    return color;
+}
+
 
 void Render() {
     int flags = UI::WindowFlags::NoTitleBar | UI::WindowFlags::AlwaysAutoResize;

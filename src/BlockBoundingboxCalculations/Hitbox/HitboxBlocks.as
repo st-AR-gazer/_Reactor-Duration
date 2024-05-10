@@ -20,9 +20,22 @@ void HitboxBlockLoop() {
     
     for (; g_ProcessingIndex < chunkEnd && g_ProcessingIndex < blocksArray.Length; g_ProcessingIndex++) {
         if (IsReactorBlock(blocksArray[g_ProcessingIndex].BlockInfo.Name)) {
-            Hitbox@ blockHitbox = BlockHitboxClassifier(blocksArray[g_ProcessingIndex]);
-            blockHitboxes.InsertLast(blockHitbox);
-            log("Added hitbox for block: " + blocksArray[g_ProcessingIndex].BlockInfo.Name + " at position: " + blockHitbox.position.ToString(), LogLevel::Info, 25);
+            
+            if (IsRingReactorBlock(blocksArray[g_ProcessingIndex].BlockInfo.Name)) {
+                Hitbox@ blockHitbox = BlockHitboxClassifier(blocksArray[g_ProcessingIndex], "ring");
+                blockHitboxes.InsertLast(blockHitbox);
+                log("Added hitbox for (ring)block: " + blocksArray[g_ProcessingIndex].BlockInfo.Name + " at position: " + blockHitbox.position.ToString(), LogLevel::Info, 25);
+                
+            } else if (IsExpandableRaceBlock(blocksArray[g_ProcessingIndex].BlockInfo.Name)) {
+                Hitbox@ blockHitbox = BlockHitboxClassifier(blocksArray[g_ProcessingIndex], "expandable");
+                blockHitboxes.InsertLast(blockHitbox);
+                log("Added hitbox for (expandable)block: " + blocksArray[g_ProcessingIndex].BlockInfo.Name + " at position: " + blockHitbox.position.ToString(), LogLevel::Info, 25);
+                
+            } else {
+                Hitbox@ blockHitbox = BlockHitboxClassifier(blocksArray[g_ProcessingIndex]);
+                blockHitboxes.InsertLast(blockHitbox);
+                log("Added hitbox for block: " + blocksArray[g_ProcessingIndex].BlockInfo.Name + " at position: " + blockHitbox.position.ToString(), LogLevel::Info, 25);
+            }
         }
     }
 
@@ -36,20 +49,37 @@ void HitboxBlockLoop() {
 }
 
 bool IsRingReactorBlock(const string &in blockName) {
-    return reactorEffectRing.Find(blockName) >= 0 || reactorEffectRectangle.Find(blockName) >= 0;
+    return reactorEffectRing.Find(blockName) >= 0;
 }
 
-Hitbox BlockHitboxClassifier(CGameCtnBlock@ block) {
+bool IsExpandableRaceBlock(const string &in blockName) {
+    return reactorEffectRectangle.Find(blockName) >= 0;
+}
+
+Hitbox BlockHitboxClassifier(CGameCtnBlock@ block, string type = "") {
     vec3 position = GetBlockPosition(block);
     vec3 rotation = GetBlockRotation(block);
     vec3 size = GetBlockSize(block);
+    vec3 offest = GetBlockOffset(type);
     vec4 color = GetBlockColor();
 
-    return Hitbox(1, position, size, rotation, color, false);
+    return Hitbox(1, position, size, rotation, offest, color, false);
 }
 
 vec4 GetBlockColor() {
     return vec4(1, 1, 1, 0.5);
+}
+
+vec3 GetBlockOffset(string type) {
+    vec3 offset = vec3(0, 0, 0);
+
+    if (type == "ring") {
+        offset = vec3(16, 16, 16);
+    } else if (type == "expandable") {
+        offset = vec3(16, 5, 16);
+    }
+    
+    return offset;
 }
 
 vec3 GetBlockSize(CGameCtnBlock@ block) {
