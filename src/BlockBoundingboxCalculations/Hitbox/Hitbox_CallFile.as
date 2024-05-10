@@ -1,5 +1,6 @@
 void HitboxCalc() {
     CreateHitbox();
+    HitboxCheck();
 }
 
 void CreateHitbox() {

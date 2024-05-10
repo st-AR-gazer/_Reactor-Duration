@@ -5,6 +5,8 @@ const float CAR_LENGTH = 3.9;
 const float CAR_HEIGHT = 1;
 const float CAR_WIDTH = 2.132;
 
+array<Hitbox@> carHitboxes;
+
 array<vec3> CreateCarHitbox() {
     vec4 carHitboxColor = vec4(1, 1, 1, 0.5);
 
@@ -17,10 +19,12 @@ array<vec3> CreateCarHitbox() {
     // Probably gonna move onto block hitboxes next since this is making me go insane...
     vec3 offsetCarRot = vec3(0, (PI - carRot.y) / (2 * -PI) * FULL_ROTATION + DEG_90_IN_FULL_ROTATION, 0);
 
-    Hitbox carHitbox(offsetCarPos, vec3(CAR_LENGTH, CAR_HEIGHT, CAR_WIDTH), offsetCarRot, carHitboxColor);
+    Hitbox carHitbox(0, offsetCarPos, vec3(CAR_LENGTH, CAR_HEIGHT, CAR_WIDTH), offsetCarRot, carHitboxColor);
 
     DrawHitboxPoints(carHitbox.GetTransformedPoints(), carHitboxColor);
 
+    carHitboxes.Resize(0);
+    carHitboxes.InsertLast(carHitbox);
     return carHitbox.GetTransformedPoints();
 }
 

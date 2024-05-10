@@ -1,6 +1,5 @@
 bool hasCalculatedReactorBlocks = false;
 
-
 array<Hitbox@> blockHitboxes;
 
 void CreateBlockHitbox() {
@@ -15,7 +14,7 @@ void HitboxBlockLoop() {
     if (hasCalculatedReactorBlocks) { return; }
     
     auto blocksArray = g_currentMap.Blocks;
-    log("HitboxBlockLoop: Processing " + blocksArray.Length + " blocks", LogLevel::Info, 41);
+    log("HitboxBlockLoop: Processing " + blocksArray.Length + " blocks", LogLevel::Info, 17);
     
     uint chunkEnd = g_ProcessingIndex + g_ChunkSize;
     
@@ -23,16 +22,16 @@ void HitboxBlockLoop() {
         if (IsReactorBlock(blocksArray[g_ProcessingIndex].BlockInfo.Name)) {
             Hitbox@ blockHitbox = BlockHitboxClassifier(blocksArray[g_ProcessingIndex]);
             blockHitboxes.InsertLast(blockHitbox);
-            log("Added hitbox for block: " + blocksArray[g_ProcessingIndex].BlockInfo.Name + " at position: " + blockHitbox.position.ToString(), LogLevel::Info, 56);
+            log("Added hitbox for block: " + blocksArray[g_ProcessingIndex].BlockInfo.Name + " at position: " + blockHitbox.position.ToString(), LogLevel::Info, 25);
         }
     }
 
     if (g_ProcessingIndex >= blocksArray.Length) {
         hasCalculatedReactorBlocks = true;
-        log("HitboxBlockLoop: Completed", LogLevel::Info, 63);
+        log("HitboxBlockLoop: Completed", LogLevel::Info, 31);
     }
     else {
-        log("HitboxBlockLoop: Processed " + g_ProcessingIndex + " blocks so far", LogLevel::Info, 66);
+        log("HitboxBlockLoop: Processed " + g_ProcessingIndex + " blocks so far", LogLevel::Info, 34);
     }
 }
 
@@ -41,11 +40,19 @@ bool IsRingReactorBlock(const string &in blockName) {
 }
 
 Hitbox BlockHitboxClassifier(CGameCtnBlock@ block) {
-
     vec3 position = GetBlockPosition(block);
-
     vec3 rotation = GetBlockRotation(block);
+    vec3 size = GetBlockSize(block);
+    vec4 color = GetBlockColor();
 
+    return Hitbox(1, position, size, rotation, color, false);
+}
+
+vec4 GetBlockColor() {
+    return vec4(1, 1, 1, 0.5);
+}
+
+vec3 GetBlockSize(CGameCtnBlock@ block) {
     string blockName = block.BlockInfo.Name;
 
     vec3 size = vec3(32, 32, 32);
@@ -55,7 +62,7 @@ Hitbox BlockHitboxClassifier(CGameCtnBlock@ block) {
         size = vec3(30, 3, 32);
     // Slope Road
     } else if (roadSlopeUp.Find(blockName) >= 0 || roadSlopeDown.Find(blockName) >= 0 || roadTiltRight.Find(blockName) >= 0 || roadTiltLeft.Find(blockName) >= 0) {
-        size = vec3(32, 16, 32);
+        size = vec3(32, 10, 32);
     // Diagonal Road
     } else if (roadDiagLeft.Find(blockName) >= 0 || roadDiagRight.Find(blockName) >= 0) {
         size = vec3(32, 10, 32);
@@ -66,8 +73,8 @@ Hitbox BlockHitboxClassifier(CGameCtnBlock@ block) {
     if (roadDirtFlat.Find(blockName) >= 0) {
         size = vec3(32, 2.2, 32);
     // Slope dirt
-    } else if (roadDirtSlopeUp.Find(blockName) >= 0 || roadSlopeDown.Find(blockName) >= 0 || roadDirtTiltRight.Find(blockName) >= 0 || roadDirtTiltLeft.Find(blockName) >= 0) {
-        size = vec3(32, 16, 32);
+    } else if (roadDirtSlopeUp.Find(blockName) >= 0 || roadDirtSlopeDown.Find(blockName) >= 0 || roadDirtTiltRight.Find(blockName) >= 0 || roadDirtTiltLeft.Find(blockName) >= 0) {
+        size = vec3(32, 10, 32);
     // Diagonal dirt
     } else if (roadDirtDiagLeft.Find(blockName) >= 0 || roadDirtDiagRight.Find(blockName) >= 0) {
         size = vec3(32, 10, 32);
@@ -79,10 +86,10 @@ Hitbox BlockHitboxClassifier(CGameCtnBlock@ block) {
         size = vec3(32, 6, 32);
     // Slope sausage
     } else if (sausageSlopeUp.Find(blockName) >= 0 || sausageSlopeDown.Find(blockName) >= 0 || sausageTiltRight.Find(blockName) >= 0 || sausageTiltLeft.Find(blockName) >= 0) {
-        size = vec3(32, 26, 32);
+        size = vec3(32, 13, 32);
     // Diagonal sausage
     } else if (sausageDiagLeft.Find(blockName) >= 0 || sausageDiagRight.Find(blockName) >= 0) {
-        size = vec3(32, 20, 32);
+        size = vec3(32, 10, 32);
     }
 
     // Bobsleigh
@@ -91,10 +98,10 @@ Hitbox BlockHitboxClassifier(CGameCtnBlock@ block) {
         size = vec3(32, 11, 32);
     // Slope bobsleigh
     } else if (bobsleighSlopeUp.Find(blockName) >= 0 || bobsleighSlopeDown.Find(blockName) >= 0 || bobsleighTiltRight.Find(blockName) >= 0 || bobsleighTiltLeft.Find(blockName) >= 0) {
-        size = vec3(32, 32, 32);
+        size = vec3(32, 25, 32);
     // Diagonal bobsleigh
     } else if (bobsleighDiagLeft.Find(blockName) >= 0 || bobsleighDiagRight.Find(blockName) >= 0) {
-        size = vec3(32, 32, 32);
+        size = vec3(32, 16, 32);
     // Tall bobsleigh
     } else if (bobsleighTall.Find(blockName) >= 0) {
         size = vec3(32, 64, 32);
@@ -110,7 +117,7 @@ Hitbox BlockHitboxClassifier(CGameCtnBlock@ block) {
         size = vec3(32, 3, 32);
     // Slope platforms
     } else if (platformSlopeUp.Find(blockName) >= 0 || platformSlopeDown.Find(blockName) >= 0 || platformTiltRight.Find(blockName) >= 0 || platformTiltLeft.Find(blockName) >= 0) {
-        size = vec3(32, 32, 32);
+        size = vec3(32, 18, 32);
     // Diagonal platforms do not exist
     }
 
@@ -120,17 +127,7 @@ Hitbox BlockHitboxClassifier(CGameCtnBlock@ block) {
         size = vec3(32, 2.5, 32);
     // Deep water
     } else if (waterDeep.Find(blockName) >= 0) {
-        size = vec3(32, 10, 32);
+        size = vec3(32, 2.5, 32);
     }
-
-    if (roadDiagLeft.Find(blockName) >= 0) {
-        rotation.y += 45;
-
-        float yawRad = rotation.y * PI / 180.0f;
-        const float nn = 10.0f;
-        position += nn * vec3(Math::Cos(yawRad), 0, Math::Sin(yawRad));
-    }
-    vec4 color = vec4(1, 1, 1, 1);
-
-    return Hitbox(position, size, rotation, color, false);
+    return size;
 }
