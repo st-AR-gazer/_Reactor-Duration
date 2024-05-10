@@ -61,3 +61,7 @@ bool IsReactorBlock(const string &in blockName) {
            platformTiltLeft.Find(blockName) >= 0 || waterShallow.Find(blockName) >= 0 || 
            waterDeep.Find(blockName) >= 0;
 }
+
+bool IsReactorItem(const string &in itemName) {
+    return gateNNxNN >= 0 || gateNNxNN >= 0 || // follor like this for tre rest of the item sizes
+}

@@ -6,10 +6,10 @@ void HitboxCheck() {
     if (carHitboxes.Length > 0) {
         for (uint i = 0; i < blockHitboxes.Length; i++) {
             if (CheckIntersection(carHitboxes[0], blockHitboxes[i])) {
-                // log("Collision: \\$0f0YAY : " + blockHitboxes[i].id, LogLevel::Info);
+                // log("Collision: \\$0f0YAY : " + blockHitboxes[i].id, LogLevel::Info, 9);
                 if (ShouldResetReactor()) { ResetReactorCountdown(); }
             }
-            // log("Collision: \\$f00NAY : " + blockHitboxes[i].id, LogLevel::Info);
+            // log("Collision: \\$f00NAY : " + blockHitboxes[i].id, LogLevel::Info, 12);
         }
     }
 

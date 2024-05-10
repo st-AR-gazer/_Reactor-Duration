@@ -2,9 +2,9 @@
 void DrawHitbox(const Hitbox &in hitbox) {
     const array<vec3> points = hitbox.GetTransformedPoints();
 
-    // log("Hitbox ID: " + hitbox.id + " Transformed Points:", LogLevel::Info);
+    // log("Hitbox ID: " + hitbox.id + " Transformed Points:", LogLevel::Info, 5);
     // for (uint i = 0; i < points.Length; i++) {
-    //     log("Point " + i + ": (" + points[i].x + ", " + points[i].y + ", " + points[i].z + ")", LogLevel::Info);
+    //     log("Point " + i + ": (" + points[i].x + ", " + points[i].y + ", " + points[i].z + ")", LogLevel::Info, 7);
     // }
 
     int[] edges = {
