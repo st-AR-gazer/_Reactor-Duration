@@ -1,5 +1,6 @@
 // File: Hitbox.as
 class Hitbox {
+    // ID; 0 = car, 1 = block, 2 = item
     uint id;
     vec3 position;
     vec3 size;
