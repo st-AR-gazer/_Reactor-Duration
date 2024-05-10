@@ -147,3 +147,17 @@ GateExpandableSpecialBoost2
 
 
 // ITEMS
+GateSpecial4mBoost
+GateSpecial4mBoost2
+
+GateSpecial8mBoost
+GateSpecial8mBoost2
+
+GateSpecial16mBoost
+GateSpecial16mBoost2
+
+GateSpecial24mBoost
+GateSpecial24mBoost2
+
+GateSpecial32mBoost
+GateSpecial32mBoost2
