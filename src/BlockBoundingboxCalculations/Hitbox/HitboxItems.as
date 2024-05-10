@@ -13,12 +13,14 @@ void HitboxItemLoop() {
     if (g_currentMap is null) { hasCalculatedReactorItems = false; return; }
     if (hasCalculatedReactorItems) { return; }
 
-    // GetItems(9) does not exist, but it's used here as a placeholder func
+    // GetItems() does not exist, but it's used here as a placeholder func
     auto itemsArray = g_currentMap.GetItems();
 
     uint chunkEnd = g_itemProcessingIndex + g_itemChunkSize;
 
     for (; g_itemProcessingIndex < chunkEnd && g_itemProcessingIndex < itemsArray.Length; g_itemProcessingIndex++) {
+
+        // IsReactorItems does not give the propper name, fix this
         if (IsReactorItem(itemsArray[g_itemProcessingIndex].ItemInfo.Name)) {
 
             Hitbox@ itemHitboxe = ItemHitboxClassifier(itemsArray[g_itemProcessingIndex]);
