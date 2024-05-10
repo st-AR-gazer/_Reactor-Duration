@@ -24,27 +24,27 @@ void HitboxBlockLoop() {
             if (IsRingReactorBlock(blocksArray[g_ProcessingIndex].BlockInfo.Name)) {
                 Hitbox@ blockHitbox = BlockHitboxClassifier(blocksArray[g_ProcessingIndex], "ring");
                 blockHitboxes.InsertLast(blockHitbox);
-                log("Added hitbox for (ring)block: " + blocksArray[g_ProcessingIndex].BlockInfo.Name + " at position: " + blockHitbox.position.ToString(), LogLevel::Info, 25);
+                log("Added hitbox for (ring)block: " + blocksArray[g_ProcessingIndex].BlockInfo.Name + " at position: " + blockHitbox.position.ToString(), LogLevel::Info, 27);
                 
             } else if (IsExpandableRaceBlock(blocksArray[g_ProcessingIndex].BlockInfo.Name)) {
                 Hitbox@ blockHitbox = BlockHitboxClassifier(blocksArray[g_ProcessingIndex], "expandable");
                 blockHitboxes.InsertLast(blockHitbox);
-                log("Added hitbox for (expandable)block: " + blocksArray[g_ProcessingIndex].BlockInfo.Name + " at position: " + blockHitbox.position.ToString(), LogLevel::Info, 25);
+                log("Added hitbox for (expandable)block: " + blocksArray[g_ProcessingIndex].BlockInfo.Name + " at position: " + blockHitbox.position.ToString(), LogLevel::Info, 32);
                 
             } else {
                 Hitbox@ blockHitbox = BlockHitboxClassifier(blocksArray[g_ProcessingIndex]);
                 blockHitboxes.InsertLast(blockHitbox);
-                log("Added hitbox for block: " + blocksArray[g_ProcessingIndex].BlockInfo.Name + " at position: " + blockHitbox.position.ToString(), LogLevel::Info, 25);
+                log("Added hitbox for block: " + blocksArray[g_ProcessingIndex].BlockInfo.Name + " at position: " + blockHitbox.position.ToString(), LogLevel::Info, 37);
             }
         }
     }
 
     if (g_ProcessingIndex >= blocksArray.Length) {
         hasCalculatedReactorBlocks = true;
-        log("HitboxBlockLoop: Completed", LogLevel::Info, 31);
+        log("HitboxBlockLoop: Completed", LogLevel::Info, 44);
     }
     else {
-        log("HitboxBlockLoop: Processed " + g_ProcessingIndex + " blocks so far", LogLevel::Info, 34);
+        log("HitboxBlockLoop: Processed " + g_ProcessingIndex + " blocks so far", LogLevel::Info, 47);
     }
 }
 
