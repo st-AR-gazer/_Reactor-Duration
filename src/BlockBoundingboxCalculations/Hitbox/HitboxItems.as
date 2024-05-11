@@ -14,44 +14,37 @@ void HitboxItemLoop() {
     if (hasCalculatedReactorItems) { return; }
 
     // GetItems() does not exist, but it's used here as a placeholder func
-    auto itemsArray = g_currentMap.GetItems();
+    auto itemsArray = g_currentMap.AnchoredObjects;
 
     uint chunkEnd = g_itemProcessingIndex + g_itemChunkSize;
 
     for (; g_itemProcessingIndex < chunkEnd && g_itemProcessingIndex < itemsArray.Length; g_itemProcessingIndex++) {
 
         // IsReactorItems does not give the propper name, fix this
-        if (IsReactorItem(itemsArray[g_itemProcessingIndex].ItemInfo.Name)) {
+        if (IsReactorItem(itemsArray[g_itemProcessingIndex].ItemModel.Name)) {
 
-            Hitbox@ itemHitboxe = ItemHitboxClassifier(itemsArray[g_itemProcessingIndex]);
-            itemHitboxes.InsertLast(itemHitboxe);
-            log("Added hitbox for item: " + itemsArray[g_itemProcessingIndex].ItemInfo.Name + " at position: " + itemHitbox.position.ToString(), LogLevel::Info, 28);
+            Hitbox@ itemHitbox = ItemHitboxClassifier(itemsArray[g_itemProcessingIndex]);
+            itemHitboxes.InsertLast(itemHitbox);
+            log("Added hitbox for item: " + itemsArray[g_itemProcessingIndex].ItemModel.Name + " at position: " + itemHitbox.position.ToString(), LogLevel::Info, 28);
         }
     }
 
     if (g_ProcessingIndex >= itemsArray.Length) {
         hasCalculatedReactorItems = true;
-        log("HitboxBlockLoop: Completed", LogLevel::Info, 34);
+        log("HitboxItemLoop: Completed", LogLevel::Info, 34);
     }
     else {
-        log("HitboxBlockLoop: Processed " + g_itemProcessingIndex + " blocks so far", LogLevel::Info, 37);
+        log("HitboxItemLoop: Processed " + g_itemProcessingIndex + " items so far", LogLevel::Info, 37);
     }
-
-
-    // Hitbox@ itemHitbox = ItemHitboxClassifier();
-
-    // DrawHitboxPoints(itemHitbox.GetTransformedPoints(), itemHitbox.color);
-
-    // itemHitboxes.InsertLast(itemHitbox);
 }
 
-Hitbox ItemHitboxClassifier(CGameCtnBlock@ block, string type = "") {
+Hitbox ItemHitboxClassifier(CGameCtnAnchoredObject@ item) {
     uint id = 1;
-    vec3 position = GetBlockPosition(block);
-    vec3 rotation = GetBlockRotation(block);
-    vec3 size = GetBlockSize(block);
-    vec3 offest = GetBlockOffset(type);
-    vec4 color = GetBlockColor();
+    vec3 position = GetItemPosition(item);
+    vec3 rotation = GetItemRotation(item);
+    vec3 size = GetItemSize(item);
+    vec3 offest = GetItemOffset();
+    vec4 color = GetItemColor();
 
     return Hitbox(id, position, size, rotation, offest, color, false);
 }

@@ -63,5 +63,7 @@ bool IsReactorBlock(const string &in blockName) {
 }
 
 bool IsReactorItem(const string &in itemName) {
-    return gateNNxNN >= 0 || gateNNxNN >= 0 || // follor like this for tre rest of the item sizes
+    return reactorItem4m.Find(itemName) >= 0 || reactorItem8m.Find(itemName) >= 0 || 
+           reactorItem16m.Find(itemName) >= 0 || reactorItem24m.Find(itemName) >= 0 || 
+           reactorItem32m.Find(itemName) >= 0;
 }

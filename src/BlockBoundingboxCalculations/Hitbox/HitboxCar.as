@@ -7,8 +7,7 @@ void CreateCarHitbox() {
 void HitboxCar() {
     Hitbox@ carHitbox = CarHitboxClassifier();
 
-    DrawHitboxPoints(carHitbox.GetTransformedPoints(), carHitbox.color);
-
+    // DrawHitboxPoints(carHitbox.GetTransformedPoints(), carHitbox.color);
     carHitboxes.Resize(0); carHitboxes.InsertLast(carHitbox);
 }
 

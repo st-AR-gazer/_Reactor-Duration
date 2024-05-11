@@ -46,9 +46,10 @@ void HitboxBlockLoop() {
     else {
         log("HitboxBlockLoop: Processed " + g_ProcessingIndex + " blocks so far", LogLevel::Info, 47);
     }
+    return;
 }
 
-Hitbox BlockHitboxClassifier(CGameCtnBlock@ block, string type = "") {
+Hitbox BlockHitboxClassifier(CGameCtnBlock@ block, const string &in type = "") {
     uint id = 1;
     vec3 position = GetBlockPosition(block);
     vec3 rotation = GetBlockRotation(block);

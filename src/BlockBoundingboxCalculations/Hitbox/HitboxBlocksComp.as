@@ -116,7 +116,7 @@ vec3 GetBlockSize(CGameCtnBlock@ block) {
     return size;
 }
 
-vec3 GetBlockOffset(string type) {
+vec3 GetBlockOffset(const string &in type) {
     vec3 offset = vec3(0, 0, 0);
 
     if (type == "ring") {
@@ -161,12 +161,12 @@ float NormalizeAngle(float angle) {
 
 vec3 CoordToPos(nat3 coord) {
     vec3 pos = vec3(coord.x * 32, (int(coord.y) - 8) * 8, coord.z * 32);
-    log("CoordToPos: Converted " + coord.ToString() + " to " + pos.ToString(), LogLevel::Info, 164);
+    // log("CoordToPos: Converted " + coord.ToString() + " to " + pos.ToString(), LogLevel::Info, 164);
     return pos;
 }
 
 vec3 CoordToPos(vec3 coord) {
     vec3 pos = vec3(coord.x * 32, (int(coord.y) - 8) * 8, coord.z * 32);
-    log("CoordToPos: Converted " + coord.ToString() + " to " + pos.ToString(), LogLevel::Info, 170);
+    // log("CoordToPos: Converted " + coord.ToString() + " to " + pos.ToString(), LogLevel::Info, 170);
     return pos;
 }

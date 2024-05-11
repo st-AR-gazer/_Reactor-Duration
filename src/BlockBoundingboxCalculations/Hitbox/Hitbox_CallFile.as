@@ -5,6 +5,6 @@ void HitboxCalc() {
 
 void CreateHitbox() {
     CreateCarHitbox();
-    CreateBlockHitbox();
     CreateItemHitbox();
+    CreateBlockHitbox();
 }

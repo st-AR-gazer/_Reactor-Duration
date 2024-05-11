@@ -252,3 +252,28 @@
     };
 
 // #endregion
+
+array<string> reactorItem4m = {
+    "GateSpecial4mBoost",
+    "GateSpecial4mBoost2"
+};
+
+array<string> reactorItem8m = {
+    "GateSpecial8mBoost",
+    "GateSpecial8mBoost2"
+};
+
+array<string> reactorItem16m = {
+    "GateSpecial16mBoost",
+    "GateSpecial16mBoost2"
+};
+
+array<string> reactorItem24m = {
+    "GateSpecial24mBoost",
+    "GateSpecial24mBoost2"
+};
+
+array<string> reactorItem32m = {
+    "GateSpecial32mBoost",
+    "GateSpecial32mBoost2"
+};

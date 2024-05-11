@@ -1,5 +1,5 @@
 [Setting category="Hitboxes" name="Draw Hitboxes"]
-bool S_drawHitboxes = false;
+bool S_drawHitboxes = true;
 
 
 void HitboxCheck() {
@@ -17,9 +17,12 @@ void HitboxCheck() {
     for (uint i = 0; i < blockHitboxes.Length; i++) {
         DrawHitbox(blockHitboxes[i]);
     }
+    for (uint j = 0; j < itemHitboxes.Length; j++) {
+        DrawHitbox(itemHitboxes[j]);
+    }
     
-    for (uint j = 0; j < carHitboxes.Length; j++) {
-        DrawHitbox(carHitboxes[j]);
+    for (uint k = 0; k < carHitboxes.Length; k++) {
+        DrawHitbox(carHitboxes[k]);
     }
 }
 
