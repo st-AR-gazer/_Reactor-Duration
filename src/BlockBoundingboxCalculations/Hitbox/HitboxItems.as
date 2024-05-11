@@ -39,12 +39,12 @@ void HitboxItemLoop() {
 }
 
 Hitbox ItemHitboxClassifier(CGameCtnAnchoredObject@ item) {
-    uint id = 1;
+    uint id = 2;
     vec3 position = GetItemPosition(item);
     vec3 rotation = GetItemRotation(item);
     vec3 size = GetItemSize(item);
     vec3 offest = GetItemOffset();
     vec4 color = GetItemColor();
 
-    return Hitbox(id, position, size, rotation, offest, color, false);
+    return Hitbox(id, position, size, rotation, offest, color, true);
 }

@@ -6,12 +6,22 @@ void HitboxCheck() {
     if (carHitboxes.Length > 0) {
         for (uint i = 0; i < blockHitboxes.Length; i++) {
             if (CheckIntersection(carHitboxes[0], blockHitboxes[i])) {
-                // log("Collision: \\$0f0YAY : " + blockHitboxes[i].id, LogLevel::Info, 9);
+                // log("Collision: \\$0f0YAY : " + blockHitboxes[i].id, LogLevel::Info, , 9, "void");
                 if (ShouldResetReactor()) { ResetReactorCountdown(); }
             }
-            // log("Collision: \\$f00NAY : " + blockHitboxes[i].id, LogLevel::Info, 12);
+            // log("Collision: \\$f00NAY : " + blockHitboxes[i].id, LogLevel::Info, , 12, "void");
         }
     }
+    if (carHitboxes.Length > 0) {
+        for (uint j = 0; j < itemHitboxes.Length; j++) {
+            if (CheckIntersection(carHitboxes[0], itemHitboxes[j])) {
+                // log("Collision: \\$0f0YAY : " + itemHitboxes[j].id, LogLevel::Info, , 9, "void");
+                if (ShouldResetReactor()) { ResetReactorCountdown(); }
+            }
+            // log("Collision: \\$f00NAY : " + itemHitboxes[j].id, LogLevel::Info, , 12, "void");
+        }
+    }
+    
 
     if (!S_drawHitboxes) return;
     for (uint i = 0; i < blockHitboxes.Length; i++) {

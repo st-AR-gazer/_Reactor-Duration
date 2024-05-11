@@ -4,12 +4,13 @@ vec3 GetItemPosition(CGameCtnAnchoredObject@ item) {
 }
 
 vec3 GetItemRotation(CGameCtnAnchoredObject@ item) {
-    vec3 rotation = vec3(item.Yaw, item.Pitch, item.Roll);
+    vec3 rotation = vec3(item.Yaw, item.Roll, item.Pitch);
+    print(item.Yaw + " " + item.Roll + " " + item.Pitch);
     return rotation;
 }
 
 vec3 GetItemSize(CGameCtnAnchoredObject@ item) {
-    string itemName = item.IdName;
+    string itemName = item.ItemModel.Name;
     vec3 size = vec3(0, 0, 0);
 
     if (reactorItem4m.Find(itemName) >= 0) {
@@ -28,11 +29,16 @@ vec3 GetItemSize(CGameCtnAnchoredObject@ item) {
 }
 
 vec3 GetItemOffset(/*const string &in type*/) {
-    vec3 offset = vec3(0, 0, 0);
+    vec3 offset = vec3(0, 
+                       0, 
+                       0);
     return offset;
 }
 
 vec4 GetItemColor() {
-    vec4 color = vec4(1, 1, 0.5, 1);
+    vec4 color = vec4(1,   // Red 
+                      1,   // Green
+                      0.5, // Blue
+                      1);  // Alpha
     return color;
 }
