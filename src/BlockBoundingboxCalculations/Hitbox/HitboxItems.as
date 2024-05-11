@@ -1,4 +1,5 @@
 bool hasCalculatedReactorItems = false;
+// IT DOES NOT WORK WITH ROTATING ITEMS BLOCKS CAR ETC BECAUSE IT ASSUMES 3.14... NEGATIVE TO POSSITVE, BUT DEGREES CAN ONLY BE POSITIVE, THAT MAY BE WHY ITS AN ISSUE.
 
 array<Hitbox@> itemHitboxes;
 
@@ -25,16 +26,16 @@ void HitboxItemLoop() {
 
             Hitbox@ itemHitbox = ItemHitboxClassifier(itemsArray[g_itemProcessingIndex]);
             itemHitboxes.InsertLast(itemHitbox);
-            log("Added hitbox for item: " + itemsArray[g_itemProcessingIndex].ItemModel.Name + " at position: " + itemHitbox.position.ToString(), LogLevel::Info, 28);
+            log("Added hitbox for item: " + itemsArray[g_itemProcessingIndex].ItemModel.Name + " at position: " + itemHitbox.position.ToString(), LogLevel::Info, 28, "HitboxItemLoop");
         }
     }
 
     if (g_ProcessingIndex >= itemsArray.Length) {
         hasCalculatedReactorItems = true;
-        log("HitboxItemLoop: Completed", LogLevel::Info, 34);
+        log("HitboxItemLoop: Completed", LogLevel::Info, 34, "HitboxItemLoop");
     }
     else {
-        log("HitboxItemLoop: Processed " + g_itemProcessingIndex + " items so far", LogLevel::Info, 37);
+        log("HitboxItemLoop: Processed " + g_itemProcessingIndex + " items so far", LogLevel::Info, 37, "HitboxItemLoop");
     }
 }
 

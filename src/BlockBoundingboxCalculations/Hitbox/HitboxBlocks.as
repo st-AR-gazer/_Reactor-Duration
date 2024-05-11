@@ -14,7 +14,7 @@ void HitboxBlockLoop() {
     if (hasCalculatedReactorBlocks) { return; }
     
     auto blocksArray = g_currentMap.Blocks;
-    log("HitboxBlockLoop: Processing " + blocksArray.Length + " blocks", LogLevel::Info, 17);
+    log("Processing " + blocksArray.Length + " blocks", LogLevel::Info, 17, "HitboxBlockLoop");
     
     uint chunkEnd = g_ProcessingIndex + g_ChunkSize;
     
@@ -24,27 +24,27 @@ void HitboxBlockLoop() {
             if (IsRingReactorBlock(blocksArray[g_ProcessingIndex].BlockInfo.Name)) {
                 Hitbox@ blockHitbox = BlockHitboxClassifier(blocksArray[g_ProcessingIndex], "ring");
                 blockHitboxes.InsertLast(blockHitbox);
-                log("Added hitbox for (ring)block: " + blocksArray[g_ProcessingIndex].BlockInfo.Name + " at position: " + blockHitbox.position.ToString(), LogLevel::Info, 27);
+                log("Added hitbox for (ring)block: " + blocksArray[g_ProcessingIndex].BlockInfo.Name + " at position: " + blockHitbox.position.ToString(), LogLevel::Info, 27, "HitboxBlockLoop");
                 
             } else if (IsExpandableRaceBlock(blocksArray[g_ProcessingIndex].BlockInfo.Name)) {
                 Hitbox@ blockHitbox = BlockHitboxClassifier(blocksArray[g_ProcessingIndex], "expandable");
                 blockHitboxes.InsertLast(blockHitbox);
-                log("Added hitbox for (expandable)block: " + blocksArray[g_ProcessingIndex].BlockInfo.Name + " at position: " + blockHitbox.position.ToString(), LogLevel::Info, 32);
+                log("Added hitbox for (expandable)block: " + blocksArray[g_ProcessingIndex].BlockInfo.Name + " at position: " + blockHitbox.position.ToString(), LogLevel::Info, 32, "HitboxBlockLoop");
                 
             } else {
                 Hitbox@ blockHitbox = BlockHitboxClassifier(blocksArray[g_ProcessingIndex]);
                 blockHitboxes.InsertLast(blockHitbox);
-                log("Added hitbox for block: " + blocksArray[g_ProcessingIndex].BlockInfo.Name + " at position: " + blockHitbox.position.ToString(), LogLevel::Info, 37);
+                log("Added hitbox for block: " + blocksArray[g_ProcessingIndex].BlockInfo.Name + " at position: " + blockHitbox.position.ToString(), LogLevel::Info, 37, "HitboxBlockLoop");
             }
         }
     }
 
     if (g_ProcessingIndex >= blocksArray.Length) {
         hasCalculatedReactorBlocks = true;
-        log("HitboxBlockLoop: Completed", LogLevel::Info, 44);
+        log("HitboxBlockLoop: Completed", LogLevel::Info, 44, "HitboxBlockLoop");
     }
     else {
-        log("HitboxBlockLoop: Processed " + g_ProcessingIndex + " blocks so far", LogLevel::Info, 47);
+        log("HitboxBlockLoop: Processed " + g_ProcessingIndex + " blocks so far", LogLevel::Info, 47, "HitboxBlockLoop");
     }
     return;
 }
