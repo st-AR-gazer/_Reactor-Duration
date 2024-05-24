@@ -26,16 +26,16 @@ void HitboxItemLoop() {
 
             Hitbox@ itemHitbox = ItemHitboxClassifier(itemsArray[g_itemProcessingIndex]);
             itemHitboxes.InsertLast(itemHitbox);
-            log("Added hitbox for item: " + itemsArray[g_itemProcessingIndex].ItemModel.Name + " at position: " + itemHitbox.position.ToString(), LogLevel::Info, 28, "HitboxItemLoop");
+            log("Added hitbox for item: " + itemsArray[g_itemProcessingIndex].ItemModel.Name + " at position: " + itemHitbox.position.ToString(), LogLevel::Info, 29, "HitboxItemLoop");
         }
     }
 
     if (g_ProcessingIndex >= itemsArray.Length) {
         hasCalculatedReactorItems = true;
-        log("HitboxItemLoop: Completed", LogLevel::Info, 34, "HitboxItemLoop");
+        log("HitboxItemLoop: Completed", LogLevel::Info, 35, "HitboxItemLoop");
     }
     else {
-        log("HitboxItemLoop: Processed " + g_itemProcessingIndex + " items so far", LogLevel::Info, 37, "HitboxItemLoop");
+        log("HitboxItemLoop: Processed " + g_itemProcessingIndex + " items so far", LogLevel::Info, 38, "HitboxItemLoop");
     }
 }
 
