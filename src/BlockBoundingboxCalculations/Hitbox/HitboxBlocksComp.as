@@ -18,7 +18,7 @@ const uint16 FreeBlockRotOffset = FreeBlockPosOffset + 0xC;
 vec3 GetBlockPosition(CGameCtnBlock@ block) {
     if (IsBlockFree(block)) {
         auto pos = Dev::GetOffsetVec3(block, FreeBlockPosOffset);
-        log("GetBlockPosition: Free block position: " + pos.ToString(), LogLevel::Warn, 21, "GetBlockPosition");
+        // log("GetBlockPosition: Free block position: " + pos.ToString(), LogLevel::Warn, 21, "GetBlockPosition");
         return pos;
     }
     return CoordToPos(block.Coord);
@@ -29,7 +29,7 @@ vec3 GetBlockRotation(CGameCtnBlock@ block) {
     if (IsBlockFree(block)) {
         auto ypr = Dev::GetOffsetVec3(block, FreeBlockRotOffset);
         vec3 yprDeg = vec3(Math::ToDeg(ypr.y), Math::ToDeg(ypr.x), Math::ToDeg(ypr.z));
-        log("GetBlockRotation: Free block rotation: " + yprDeg.ToString(), LogLevel::Warn, 32, "GetBlockRotation");
+        // log("GetBlockRotation: Free block rotation: " + yprDeg.ToString(), LogLevel::Warn, 32, "GetBlockRotation");
         return yprDeg;
     }
     return vec3(0, 0, 0);
