@@ -39,7 +39,7 @@ vec3 GetBlockRotation(CGameCtnBlock@ block) {
 vec3 GetBlockSize(CGameCtnBlock@ block) {
     string blockName = block.BlockInfo.Name;
 
-    vec3 size = vec3(32, 32, 32);
+    vec3 size = vec3(0, 0, 0);
     // Road
     // Flat Road
     if (roadFlat.Find(blockName) >= 0) {
