@@ -11,19 +11,19 @@ void HitboxCheck() {
                     ResetReactorCountdown(); 
                 }
             }
-            // log("Collision: \\$f00NAY : " + blockHitboxes[i].id, LogLevel::Info, 12, "HitboxCheck");
+            // log("Collision: \\$f00NAY : " + blockHitboxes[i].id, LogLevel::Info, 14, "HitboxCheck");
         }
     }
 
     if (carHitboxes.Length > 0) {
         for (uint j = 0; j < itemHitboxes.Length; j++) {
             if (CheckIntersection(carHitboxes[0], itemHitboxes[j])) {
-                // log("Collision: \\$0f0YAY : " + itemHitboxes[j].id, LogLevel::Info, 18, "HitboxCheck");
+                // log("Collision: \\$0f0YAY : " + itemHitboxes[j].id, LogLevel::Info, 21, "HitboxCheck");
                 if (g_reactorLevel != 2 && ShouldResetReactor()) { 
                     ResetReactorCountdown(); 
                 }
             }
-            // log("Collision: \\$f00NAY : " + itemHitboxes[j].id, LogLevel::Info, 21, "HitboxCheck");
+            // log("Collision: \\$f00NAY : " + itemHitboxes[j].id, LogLevel::Info, 26, "HitboxCheck");
         }
     }
     
