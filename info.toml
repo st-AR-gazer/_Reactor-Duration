@@ -2,7 +2,7 @@
 name = "Reactor Duration"
 author = "'AR_-_' or 'ar.....'"
 category = "Overlay"
-version = "0.3.0"
+version = "0.3.1"
 
 [script]
 dependencies = [ "VehicleState", "Camera" ]

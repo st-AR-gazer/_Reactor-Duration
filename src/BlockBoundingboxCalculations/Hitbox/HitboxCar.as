@@ -24,7 +24,7 @@ Hitbox CarHitboxClassifier() {
 
 
 
-
+/*
 void Render() {
     int flags = UI::WindowFlags::NoTitleBar | UI::WindowFlags::AlwaysAutoResize;
     UI::SetNextWindowSize(50, 50);
@@ -51,3 +51,4 @@ void Render() {
 
     UI::End();
 }
+*/
